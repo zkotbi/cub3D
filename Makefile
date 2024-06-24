@@ -6,35 +6,67 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/06/24 09:43:20 by hibenouk         ###   ########.fr        #
+#    Updated: 2024/06/24 10:26:15 by hibenouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= cub3D
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3 -ggdb
-INC			= ./include/
-RM			= rm -rf
+# NAME		= cub3D
+# CC			= cc
+# CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3 -ggdb
+# INC			= ./include
 
-all: $(NAME)
+# OBJ_DIR = ./obj/
+# SRC_DIR = ./
 
-$(LIBFT):
-	@make -C $(LIBRAIRIE)
 
-$(NAME): $(LIBFT) $(OBJS)
-	@$(CC) -o $(NAME) $(OBJS)
+# SRCS = $(shell find . -type f -name "*.c"  | cut -c3-)
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+# OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+
+
+# all: $(NAME)
+
+
+# $(NAME): $(OBJS) 
+# 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@echo $< $@
+# 	$(CC) -c $(CFLAGS) $< -o $@
+
+
+NAME        = cub3D
+CC          = cc
+CFLAGS      = -Wall -Wextra -fsanitize=address -g3 -ggdb -I$(INC)
+INC         = ./include
+
+OBJ_DIR     = ./obj/
+SRC_DIR     = ./
+
+SRCS        = $(shell find $(SRC_DIR) -type f -name "*.c")
+OBJS        = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
+
+
+all: dir $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+	@mkdir -p $(dir $@)
+	$(CC) -c $(CFLAGS) $< -o $@
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@make clean -C $(LIBRAIRIE)
-	@$(RM) $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@make fclean -C $(LIBRAIRIE)
-	@$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
+dir :
+	mkdir -p obj
 
 .PHONY: all clean fclean re

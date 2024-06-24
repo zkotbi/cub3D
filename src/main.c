@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/24 09:14:08 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/24 10:26:56 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ int main(int argc, char **argv)
 {
 	if (argc < 2)
 		return (fd_putstr("few arguments\n", 2), 1);
+	error_check("hello world\n");
 }
