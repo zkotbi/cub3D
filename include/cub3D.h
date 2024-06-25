@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 11:25:54 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/25 12:50:23 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_lst
 {
 	char *content;
 	struct s_lst *next;
+	long size; // ONLY FOR MAP
 } t_lst ;
 
 typedef struct s_token

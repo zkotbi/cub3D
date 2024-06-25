@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 08:11:19 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 11:27:19 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/25 12:30:37 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void set_rgb(char *info, t_color *rgb)
 	
 	i = 0;
 	tmp = ft_split(info, ',');
+	*rgb = (t_color){-1, -1, -1};
 	while (tmp[i] != NULL)
 	{
 		if (i > 2)
