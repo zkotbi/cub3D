@@ -2,3 +2,5 @@
 ./obj
 *.o
 cub3D
+main
+
