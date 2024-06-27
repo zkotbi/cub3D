@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 23:07:33 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/27 01:25:03 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/27 16:26:01 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ void free_tokens(t_token *tokens, t_lst *content)
 	free(tokens);
 }
 
+void free_map(t_map *map)
+{
+	free_tab(map->map);
+	free(map->sizes);
+	free(map->pos);
+	free(map);
+}
+
 void free_param(t_param *param)
 {
 	free(param->floor_color);
@@ -54,6 +62,6 @@ void free_param(t_param *param)
 	free(param->west_texture);
 	free(param->north_texture);
 	free(param->south_texture);
-	free_tab(param->map);
+	free_map(param->map_data);
 	free(param);
 }

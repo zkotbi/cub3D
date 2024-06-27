@@ -1,0 +1,44 @@
+Process:         cub3D [87511]
+Path:            /Volumes/VOLUME/*/cub3D
+Load Address:    0x10a581000
+Identifier:      cub3D
+Version:         ???
+Code Type:       X86-64
+Parent Process:  zsh [87026]
+
+Date/Time:       2024-06-27 16:31:56.001 +0100
+Launch Time:     2024-06-27 16:31:55.541 +0100
+OS Version:      Mac OS X 10.15.7 (19H2026)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 12.4 (12D4e)
+
+Physical footprint:         776K
+Physical footprint (peak):  776K
+----
+
+leaks Report Version: 4.0
+Process 87511: 709 nodes malloced for 56 KB
+Process 87511: 0 leaks for 0 total leaked bytes.
+
+north texture: ./path_to_the_north_texture
+-------------------------
+south texture: ./path_to_the_south_texture
+-------------------------
+west texture: ./path_to_the_west_texture
+-------------------------
+east texture: ./path_to_the_east_texture
+-------------------------
+celling: 225, 30, 0
+-------------------------
+floor: 220, 100, 0
+-------------------------
+lenght: 11, height: 4
+-------------------------
+player_pos: 1, 2
+-----------MAP-----------
+|11111111111|
+|11100111111|
+|1N0011     |
+|111111     |
+-----------MAP-----------

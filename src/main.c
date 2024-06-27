@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/27 02:22:02 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/27 16:30:54 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,14 @@ int main(int argc, char **argv)
     printf("celling: %d, %d, %d\n", param->celling_color->red, param->celling_color->green, param->celling_color->blue);
 	printf("-------------------------\n");
     printf("floor: %d, %d, %d\n", param->floor_color->red, param->floor_color->green, param->floor_color->blue);
+	printf("-------------------------\n");
+    printf("lenght: %d, height: %d\n", param->map_data->sizes->x, param->map_data->sizes->y);
+	printf("-------------------------\n");
+    printf("player_pos: %d, %d\n", param->map_data->pos->x, param->map_data->pos->y);
 	printf("-----------MAP-----------\n");
-	while (param->map[i] != NULL)
+	while (param->map_data->map[i] != NULL)
 	{
-		printf("|%s|\n", param->map[i]);
+		printf("|%s|\n", param->map_data->map[i]);
 		i++;
 	}
 	printf("-----------MAP-----------\n");
