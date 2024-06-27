@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/26 21:45:39 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:58:48 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_data init_screen(void)
 	return (data);
 }
 
-void put_pixels(mlx_image_t *image, t_vec2 coord, t_vec2 size, int color) 
+void put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size, int color) 
 {
 
 	for (int i = coord.x; i < coord.x + size.x; i++) 
@@ -69,19 +69,17 @@ void put_pixels(mlx_image_t *image, t_vec2 coord, t_vec2 size, int color)
 			mlx_put_pixel(image, i, j, color);
 	}
 }
-void mini_map_rander(t_data *data, int n, int m, char map[9][7])
+void mini_map_rander(t_data *data, char map[][16])
 {
 
-	int grid_size_x = WIDTH / n;
-	int grid_size_y = HEIGHT / m;
-	for (int i = 0; i < n; i++)
+	int grid_size_x = 64;
+	int grid_size_y = 64;
+	for (int i = 0; i < 16; i++)
 	{
-		for (int j = 0; j < m; j++)
+		for (int j = 0; j < 8; j++)
 		{
 			if (map[i][j] == '1')
 				put_pixels(data->image, vec2d(i * grid_size_x, j * grid_size_y), vec2d(grid_size_x, grid_size_y), 0xFFFFFFFF);
-			else if (map[i][j] == 'W')
-				put_pixels(data->image, vec2d(i * grid_size_x, j * grid_size_y), vec2d(grid_size_x, grid_size_y), 0x37B7C3);
 			else 
 				put_pixels(data->image, vec2d(i * grid_size_x, j * grid_size_y), vec2d(grid_size_x, grid_size_y), 0x623f239);
 		}
@@ -93,19 +91,18 @@ int main(void)
 	int n = 9, m = 7;
 
 
-	char map[9][7] = {
-		{'1', '1', '1', '1', '1', '1', '1'},
-		{'1', '1', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '1'},
-		{'1', '0', '0', '0', '1', '1', '1'},
-		{'1', '0', 'W', '0', '1', '1', '1'},
-		{'1', '0', '0', '0', '1', '1', '1'},
-		{'1', '0', '0', '0', '1', '0', '1'},
-		{'1', '0', '0', '0', '0', '0', '1'},
-		{'1', '1', '1', '1', '1', '1', '1'},
+	char map[][16] =  {
+		{'1', '1', '1','1', '1', '1','1', '1', '1','1', '1', '1','1', '1', '1', '1'},
+		{'1', '0', '0','0', '0', '1','0', '1', '0','1', '0', '0','1', '1', '0', '1'},
+		{'1', '0', '0','0', '0', '1','0', '1', '0','1', '0', '0','1', '1', '0', '1'},
+		{'1', '0', '0','0', '0', '1','0', '1', '0','1', '0', '0','1', '1', '0', '1'},
+		{'1', '0', '0','0', '0', '1','0', '1', '0','1', '0', '0','1', '1', '0', '1'},
+		{'1', '0', '0','0', '0', '1','0', '1', '0','1', '0', '0','1', '1', '0', '1'},
+		{'1', '0', '0','0', '0', '1','0', '1', '0','1', '0', '0','1', '1', '0', '1'},
+		{'1', '1', '1','1', '1', '1','1', '1', '1','1', '1', '1','1', '1', '1', '1'},
 	};
 	data = init_screen();
-	mini_map_rander(&data, n, m, map);
+	mini_map_rander(&data, map);
 
 
 	// mlx_key_hook(data.mlx, ft_hook, data.mlx);

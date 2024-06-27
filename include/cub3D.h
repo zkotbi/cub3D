@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/26 21:31:17 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:48:49 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ typedef struct s_data
 	mlx_t *mlx;
 	mlx_image_t *image;
 }t_data;
-typedef struct s_vec2
+
+typedef struct s_vec2d
 {
 	int x;
 	int y;
-}t_vec2;
+}t_vec2d;
+
 /*-----error_handle-----*/
 void	error_check(char *argv);
 int		extension_check(char *argv);
@@ -41,5 +43,5 @@ void	fd_putstr(const char *str, int fd);
 
 
 //math
-t_vec2 vec2d(int x, int y);
+t_vec2d vec2d(int x, int y);
 #endif
