@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   vec.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
+/*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 08:41:27 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 14:34:21 by hibenouk         ###   ########.fr       */
+/*   Created: 2024/06/26 21:21:45 by hibenouk          #+#    #+#             */
+/*   Updated: 2024/06/26 21:31:16 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../include/cub3D.h"
+#include "cub3D.h"
 
-void fd_putstr(const char *str, int fd)
+t_vec2 vec2d(int x, int y)
 {
-	int i;
-
-	i = 0;
-	while (str[i] != 0)
-		i++;
-	write(fd, str, i);
+	return ((t_vec2){.x = x, .y = y});
 }

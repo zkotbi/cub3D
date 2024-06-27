@@ -1,6 +1,5 @@
 -Wall
 -Wextra
--Werror
 -Iinclude
 -I/Users/hibenouk/.brew/include
 -I/zkotbi/hibenouk/.brew/include
