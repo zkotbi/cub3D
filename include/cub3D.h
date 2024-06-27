@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 12:50:23 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/26 23:25:55 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <MLX42/MLX42.h>
 
 enum param_type {
 	CELLING,
@@ -31,6 +32,7 @@ typedef struct s_lst
 {
 	char *content;
 	struct s_lst *next;
+	struct s_lst *prev;
 	long size; // ONLY FOR MAP
 } t_lst ;
 
@@ -67,8 +69,14 @@ typedef struct s_param
 #define BUFFER_SIZE 10
 #endif
 
-/*-----error_handle-----*/
-void	error_check(char *argv);
+/*---------------FREE---------------*/
+void	free_tokens(t_token *tokens, t_lst *content);
+void	free_tab(char **tab);
+void	free_lst(t_lst *lst);
+void	free_param(t_param *param);
+
+/*-----parsing_and_error_handle-----*/
+t_param	*parser_and_error_check(char *argv);
 int		extension_check(char *argv);
 void	exit_strerror(char *str, int code);
 void	malloc_null_check(void *ptr);
@@ -76,6 +84,8 @@ int		verify_line(char *info, int	*count, int fd);
 t_lst	*allocate_file_content(char *argv);
 t_token	*tokeniz_file_content(t_lst *file_content);
 t_param	*get_and_verify_param(t_token *tokens);
+void	verify_map(t_param *param, t_lst *lst);
+void	parser_map(t_param *param, t_lst *lst);
 // int		verify_type(char *info, int *count);
 
 /*-----LIBFT-----*/

@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 08:37:33 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 07:51:59 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/27 01:17:46 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_lst *allocate_file_content(char *argv)
 	malloc_null_check(content);
 	lst_tmp = content;
 	lst_tmp->content = NULL;
+	lst_tmp->prev = NULL;
 	while (line != NULL)
 	{
 		lst_tmp->content = line;
@@ -34,6 +35,7 @@ t_lst *allocate_file_content(char *argv)
 		{
 			lst_tmp->next = malloc(sizeof(t_lst));
 			malloc_null_check(lst_tmp);
+			lst_tmp->next->prev = lst_tmp;
 		}
 		else
 			lst_tmp->next = NULL;
@@ -55,8 +57,8 @@ void tokens_init(t_token *tokens)
 }
 t_token *tokeniz_file_content(t_lst *file_content)
 {
-	t_lst *lst_tmp;
-	t_token *tokens;
+	t_lst	*lst_tmp;
+	t_token	*tokens;
 
 	tokens = malloc(sizeof(t_token));
 	malloc_null_check(tokens);

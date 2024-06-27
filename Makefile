@@ -6,51 +6,35 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/06/24 10:26:15 by hibenouk         ###   ########.fr        #
+#    Updated: 2024/06/26 23:50:12 by zkotbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# NAME		= cub3D
-# CC			= cc
-# CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3 -ggdb
-# INC			= ./include
-
-# OBJ_DIR = ./obj/
-# SRC_DIR = ./
-
-
-# SRCS = $(shell find . -type f -name "*.c"  | cut -c3-)
-
-# OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
-
-
-# all: $(NAME)
-
-
-# $(NAME): $(OBJS) 
-# 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@echo $< $@
-# 	$(CC) -c $(CFLAGS) $< -o $@
-
 
 NAME        = cub3D
+
 CC          = cc
-CFLAGS      = -Wall -Wextra -fsanitize=address -g3 -ggdb -I$(INC)
-INC         = ./include
+
+INC         = -Iinclude -I$(HOME)/.brew/include
+
+CFLAGS      = -Wall -Wextra $(INC) 
+#-fsanitize=address -g3 -ggdb 
 
 OBJ_DIR     = ./obj/
+
 SRC_DIR     = ./
 
-SRCS        = $(shell find $(SRC_DIR) -type f -name "*.c")
+LIB =  -L$(HOME)/.brew/lib/ -lmlx42 -lglfw
+
+SRCS        = $(shell find $(SRC_DIR) -type f -name "*.c" | grep -v test)
+
 OBJS        = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 
-all: dir $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)
@@ -66,7 +50,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-dir :
-	mkdir -p obj
+
 
 .PHONY: all clean fclean re

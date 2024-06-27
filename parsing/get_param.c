@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 08:11:19 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 12:30:37 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/26 23:30:25 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void set_rgb(char *info, t_color *rgb)
 	}
 	if (rgb->red == -1 || rgb->green == -1 || rgb->blue == -1)
 		exit_strerror("invalid color informaton2\n", 1);
+	free_tab(tmp);
 }
 
 void verify_color(t_param *param, char *path, enum param_type type)
@@ -76,13 +77,6 @@ void verify_color(t_param *param, char *path, enum param_type type)
 		malloc_null_check(param->floor_color);
 		set_rgb(&path[i], param->floor_color);
 	}
-}
-
-void verify_map(t_param *param, t_lst *lst)
-{
-	if (param == NULL || lst == NULL)
-		exit(5);
-	printf("ba9i magaditch lmap\n");
 }
 
 t_param *get_and_verify_param(t_token *tokens)

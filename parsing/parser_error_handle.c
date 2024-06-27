@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handle.c                                     :+:      :+:    :+:   */
+/*   parser_error_handle.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 08:20:36 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 10:19:17 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/06/27 01:23:22 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ int extension_check(char *argv)
 	return (fd_putstr("Error\nmissing extension .cub\n", 2), 0);
 }
 
-void error_check(char *argv)
+// void free_tokens(t_token *tokens, t_lst *content)
+// {
+// 	if (tokens == NULL || content == NULL)
+// 		return ;
+// }
+
+t_param *parser_and_error_check(char *argv)
 {
 	t_lst *file_content;
 	t_token *tokens;
@@ -45,6 +51,9 @@ void error_check(char *argv)
 		exit_strerror("empty file\n", 1);
 	tokens = tokeniz_file_content(file_content);
 	param = get_and_verify_param(tokens);
+	free_tokens(tokens, file_content);
+	while(1){}
+	return (param);
 }
 
 // void exit_strerror(char *str, int code)
