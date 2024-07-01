@@ -6,7 +6,7 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/06/26 21:43:21 by hibenouk         ###   ########.fr        #
+#    Updated: 2024/07/01 11:42:01 by hibenouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC          = cc
 
 INC         = -Iinclude -I$(HOME)/.brew/include
 
-CFLAGS      = -Wall -Wextra -fsanitize=address -g3 -ggdb $(INC)
+CFLAGS      = -Wall -Wextra -fsanitize=address -g3 -ggdb $(INC) 
 
 OBJ_DIR     = ./obj/
 
@@ -30,7 +30,7 @@ SRCS        = $(shell find $(SRC_DIR) -type f -name "*.c" | grep -v test)
 OBJS        = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 
-all: $(NAME)
+all: $(NAME) run
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
@@ -49,6 +49,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+run :
+	./$(NAME)
 
 
 .PHONY: all clean fclean re

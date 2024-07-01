@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 08:41:27 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/27 17:04:25 by hibenouk         ###   ########.fr       */
+/*   Created: 2024/06/25 05:31:08 by zkotbi            #+#    #+#             */
+/*   Updated: 2024/06/25 05:32:56 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
-void fd_putstr(const char *str, int fd)
+void exit_strerror(char *str, int code)
 {
-	int i;
+	if (str != NULL)
+	{
+		fd_putstr("Error\n", 2);
+		fd_putstr(str, 2);
+	}
+	exit(code);
+}
 
-	i = 0;
-	while (str[i] != 0)
-		i++;
-	write(fd, str, i);
+void malloc_null_check(void *ptr)
+{
+	if (ptr == NULL)
+		exit_strerror("malloc failed\n", 1);
 }

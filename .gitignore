@@ -2,5 +2,7 @@
 ./obj
 *.o
 cub3D
-test.c
+*test*
 a.out
+main
+file

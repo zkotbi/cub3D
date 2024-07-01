@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 08:41:27 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/27 17:04:25 by hibenouk         ###   ########.fr       */
+/*   Created: 2024/06/25 10:30:49 by zkotbi            #+#    #+#             */
+/*   Updated: 2024/06/25 11:28:47 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
-void fd_putstr(const char *str, int fd)
+int	ft_atoi(const char *str)
 {
-	int i;
+	int	result;
 
-	i = 0;
-	while (str[i] != 0)
-		i++;
-	write(fd, str, i);
+	result = 0;
+	while (*str != 0 && *str != '\n')
+	{
+		if (*str < '0' || *str > '9')
+			return (-1);
+		result = result * 10 + (*str - 48);
+		if (result > 255)
+			return (-1);
+		str++;
+	}
+	return (result);
 }
