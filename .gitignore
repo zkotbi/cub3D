@@ -6,3 +6,6 @@ cub3D
 a.out
 main
 file
+compile_commands.json
+.cache
+

@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:21:45 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/02 15:19:16 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:25:49 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,13 @@ t_vec2f grid(t_vec2d vec)
 t_vec2d pixel(t_vec2d vec)
 {
 	return (vec2d(vec.x * GRID_X, vec.y * GRID_Y));
+}
+t_vec2f direction(t_vec2d v, t_vec2d u)
+{
+	return (vec2f(u.x - v.x, u.y - v.y));
+}
+
+t_vec2f vec2dtf(t_vec2d v)
+{
+	return (vec2f(v.x, v.y));
 }

@@ -6,14 +6,14 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/02 16:39:48 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/02 22:06:15 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <assert.h>
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <assert.h>
 #include "MLX42/MLX42.h"
 #include "cub3D.h"
 
@@ -44,8 +44,6 @@ mlx_image_t *new_image_to_window(t_data *data, t_vec2d pos, t_vec2d size)
 	return (image);
 }
 
-
-
 t_data init_screen(void)
 {
 	t_data data;
@@ -68,11 +66,7 @@ void put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size, int color)
 	}
 }
 
-int check_wall(t_vec2f p1, t_vec2f p2,t_map *map_data )
-{
-	const t_vec2f d = sub2f(p2, p1);
 
-}
 
 t_vec2d mini_map_render(t_data *data, t_map *map_data)
 {
@@ -98,8 +92,6 @@ t_vec2d mini_map_render(t_data *data, t_map *map_data)
 	return (pos);
 }
 
-
-
 bool cmp_float(double x, double y)
 {
 	if (fabs(x - y) < 1e-4)
@@ -108,6 +100,7 @@ bool cmp_float(double x, double y)
 }
 
 // take a point in grid coord;
+// this may sig fault if vec + size is out of boundary
 void put_point(t_data *data, t_vec2d vec)
 {
 	put_pixels(data->image, vec, vec2d(8, 8), 0xFF0000FF);
@@ -120,7 +113,6 @@ double sign(double n)
 
 double snap(double x, double dx)
 {
-	const double eps = 1e-3;
 	if (dx > 0)
 		return (ceil(x + sign(dx) * eps));
 	else if (dx < 0)
@@ -129,32 +121,31 @@ double snap(double x, double dx)
 }
 
 // start and end are grid coord
-t_vec2d ray_casting(t_vec2f start, t_vec2f end)
+t_vec2d ray_casting(t_vec2f p1, t_vec2f d)
 {
-	const t_vec2f d = sub2f(end, start);
 	double x3 = 0, y3 = 0;
 
 	if (d.x != 0)
 	{
 		double m = d.y / d.x;
-		double c = start.y - start.x * m;
-		double x2 = snap(start.x, d.x);
+		double c = p1.y - p1.x * m;
+		double x2 = snap(p1.x, d.x);
 		double y2 = x2 * m + c;
 		if (m != 0)
 		{
-			y3 = snap(start.y, d.y);
+			y3 = snap(p1.y, d.y);
 			x3 = (y3 - c) / m;
 		}
 		t_vec2f a = vec2f(x2, y2);
 		t_vec2f b = vec2f(x3, y3);
-		t_vec2f p2 = min_distance(a, b, start);
+		t_vec2f p2 = min_distance(a, b, p1);
 		t_vec2d p = vec2d(p2.x * GRID_X, p2.y * GRID_Y);
 		return (p);
 	}
 	else
 	{
-		y3 = snap(start.y, d.y);
-		x3 = start.x;
+		y3 = snap(p1.y, d.y);
+		x3 = p1.x;
 		t_vec2d dv = vec2d(x3 * GRID_X, y3 * GRID_Y);
 		return (dv);
 	}
@@ -167,11 +158,11 @@ void print_map(t_param *param)
 	t_map *map_data = param->map_data;
 
 	char **map = map_data->map;
-	for (int i = 0;i < map_data->sizes->y;i++)
+	for (int i = 0; i < map_data->sizes->y; i++)
 	{
 		printf("|");
-		for (int j = 0; j < map_data->sizes->x; j++) 
-			printf("%c",map[i][j]);
+		for (int j = 0; j < map_data->sizes->x; j++)
+			printf("%c", map[i][j]);
 		printf("|\n");
 	}
 }
@@ -181,7 +172,7 @@ int main(int ac, char **argv)
 	t_data data;
 	t_param *param;
 
-	param = parser_and_error_check("./maps/map2.cub" );
+	param = parser_and_error_check("./maps/map2.cub");
 	print_map(param);
 
 	data = init_screen();
@@ -194,14 +185,13 @@ int main(int ac, char **argv)
 	data.pos = pos2;
 	// data.pos = pos2;
 	// // data.map = map;
-	put_point(&data, pos2);
-	t_vec2d point = pos;
-	for (int i = 0;i<6;i++)
-	{
-		point = ray_casting(grid(point), grid(pos2));
-		VEC(point)
-		put_point(&data, point);
-	}
+	// put_point(&data, pos2);
+	// t_vec2d point = pos;
+	// for (int i = 0; i < 6; i++)
+	// {
+	// 	point = ray_casting(grid(point), grid(pos2));
+	// 	put_point(&data, point);
+	// }
 
 	// // ray_casting(&data, grid(pos), grid(pos3));;
 	// // for(double m = 0.5f; m < 100.0f;m += 0.5f){

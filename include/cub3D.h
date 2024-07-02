@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/02 15:19:21 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/02 22:06:38 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 # define WIDTH 1024
 # define HEIGHT 512
 # define GRID_X 64.0f
 # define GRID_Y 64.0f
-# define MOVE_SPEED 5
+# define MOVE_SPEED 1
 # define PI 3.14159265359
+# define eps 1e-3
 
 # include <MLX42/MLX42.h>
 # include <fcntl.h>
@@ -153,6 +155,8 @@ double				vec_distance(t_vec2f a, t_vec2f b);
 t_vec2f				line_eqution(t_vec2f v, t_vec2f u);
 t_vec2f				grid(t_vec2d vec);
 t_vec2d				pixel(t_vec2d vec);
+t_vec2f direction(t_vec2d v, t_vec2d u);
+t_vec2f vec2dtf(t_vec2d v);
 // int		verify_type(char *info, int *count);
 
 /*-----LIBFT-----*/

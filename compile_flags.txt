@@ -1,5 +1,0 @@
--Wall
--Wextra
--Iinclude
--I/Users/hibenouk/.brew/include
--I/Users/zkotbi/.brew/include
