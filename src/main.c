@@ -6,13 +6,14 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/01 16:58:38 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:39:48 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <assert.h>
 #include "MLX42/MLX42.h"
 #include "cub3D.h"
 
@@ -42,6 +43,9 @@ mlx_image_t *new_image_to_window(t_data *data, t_vec2d pos, t_vec2d size)
 	}
 	return (image);
 }
+
+
+
 t_data init_screen(void)
 {
 	t_data data;
@@ -64,12 +68,21 @@ void put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size, int color)
 	}
 }
 
-t_vec2d mini_map_render(t_data *data, char map[][16])
+int check_wall(t_vec2f p1, t_vec2f p2,t_map *map_data )
+{
+	const t_vec2f d = sub2f(p2, p1);
+
+}
+
+t_vec2d mini_map_render(t_data *data, t_map *map_data)
 {
 	t_vec2d pos = {0};
-	for (int i = 0; i < 8; i++)
+	char **map;
+
+	map = map_data->map;
+	for (int i = 0; i < map_data->sizes->y; i++)
 	{
-		for (int j = 0; j < 16; j++)
+		for (int j = 0; j < map_data->sizes->x; j++)
 		{
 			if (map[i][j] == '1')
 				put_pixels(data->image, vec2d(j * GRID_X, i * GRID_Y), vec2d(GRID_X - 1, GRID_Y - 1), 0xFFFFFFFF);
@@ -78,26 +91,14 @@ t_vec2d mini_map_render(t_data *data, char map[][16])
 				pos = vec2d(j * GRID_X, i * GRID_Y);
 				put_pixels(data->image, vec2d(j * GRID_X, i * GRID_Y), vec2d(GRID_X - 1, GRID_Y - 1), 0xFF8F00ff);
 			}
-			else
+			else if (map[i][j] == '0')
 				put_pixels(data->image, vec2d(j * GRID_X, i * GRID_Y), vec2d(GRID_X - 1, GRID_Y - 1), 0xFF8F00ff);
 		}
 	}
 	return (pos);
 }
 
-/*
- *
-	OldRange = (OldMax - OldMin)
-	NewRange = (NewMax - NewMin)
-	NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
-*/
 
-// scale(c.a, 2, -2, param->width)
-
-double scale(double a, double n_max, double n_min, double o_max)
-{
-	return ((a * (n_max - n_min)) / o_max + n_min);
-}
 
 bool cmp_float(double x, double y)
 {
@@ -106,57 +107,12 @@ bool cmp_float(double x, double y)
 	return (0);
 }
 
-void draw_line(mlx_image_t *image, t_vec2f start, t_vec2f end)
-{
-	double m;
-	double c;
-
-	m = (start.y - end.y) / (start.x - end.x);
-	c = start.y - m * start.x;
-	for (uint32_t i = 0; i < image->width; i++)
-	{
-		for (uint32_t j = 0; j < image->height; j++)
-		{
-			if (cmp_float((double)i * m + c, (double)j))
-				mlx_put_pixel(image, i, j, 0xFFDB5CFF);
-		}
-	}
-}
-// x' = x * cos(theta) - y * sin(theta)
-// y' = x * sin(theta) _ y * costheta)
-double deg_to_rad(double deg)
-{
-	double rad;
-
-	rad = deg * PI;
-	rad = rad / 180.0f;
-	return (rad);
-}
-t_vec2f rotate(t_vec2f vec, double angle)
-{
-	t_vec2f new_vec;
-
-	angle = deg_to_rad(angle);
-	new_vec.x = vec.x * cos(angle) - vec.y * sin(angle);
-	new_vec.x = vec.x * sin(angle) + vec.y * cos(angle);
-	FVEC(new_vec);
-	return (new_vec);
-}
-void put_player_ray(mlx_image_t *player, t_vec2d p)
-{
-	t_vec2f vec = {32, 32};
-	put_pixels(player, p, vec2d(player->width / 3, player->height / 3), 0xFFDB5CFF);
-
-	// for (int i = 0;i<=90;i++)
-	// {
-	// 	vec = rotate(vec,  i);
-	// 	draw_line(player, vec2f(0, 0), vec);
-	// }
-}
+// take a point in grid coord;
 void put_point(t_data *data, t_vec2d vec)
 {
 	put_pixels(data->image, vec, vec2d(8, 8), 0xFF0000FF);
 }
+
 double sign(double n)
 {
 	return ((n >= 0) - (n < 0));
@@ -173,13 +129,11 @@ double snap(double x, double dx)
 }
 
 // start and end are grid coord
-t_vec2d ray_casting(t_data *data, t_vec2f start, t_vec2f end)
+t_vec2d ray_casting(t_vec2f start, t_vec2f end)
 {
-	t_vec2f d;
+	const t_vec2f d = sub2f(end, start);
 	double x3 = 0, y3 = 0;
 
-	d = sub2f(end, start);
-	FVEC(d)
 	if (d.x != 0)
 	{
 		double m = d.y / d.x;
@@ -188,74 +142,84 @@ t_vec2d ray_casting(t_data *data, t_vec2f start, t_vec2f end)
 		double y2 = x2 * m + c;
 		if (m != 0)
 		{
-			FINT(start.y)
 			y3 = snap(start.y, d.y);
 			x3 = (y3 - c) / m;
-			t_vec2d dv = vec2d(x3 * GRID_X, y3 * GRID_Y);
-			VEC(dv)
 		}
 		t_vec2f a = vec2f(x2, y2);
 		t_vec2f b = vec2f(x3, y3);
 		t_vec2f p2 = min_distance(a, b, start);
 		t_vec2d p = vec2d(p2.x * GRID_X, p2.y * GRID_Y);
-		VEC(p)
 		return (p);
 	}
 	else
 	{
-		// TODO : this need to be test
 		y3 = snap(start.y, d.y);
 		x3 = start.x;
 		t_vec2d dv = vec2d(x3 * GRID_X, y3 * GRID_Y);
 		return (dv);
 	}
+	exit(1);
 	return (vec2d(0, 0));
 }
 
+void print_map(t_param *param)
+{
+	t_map *map_data = param->map_data;
 
-int main(void)
+	char **map = map_data->map;
+	for (int i = 0;i < map_data->sizes->y;i++)
+	{
+		printf("|");
+		for (int j = 0; j < map_data->sizes->x; j++) 
+			printf("%c",map[i][j]);
+		printf("|\n");
+	}
+}
+
+int main(int ac, char **argv)
 {
 	t_data data;
-	mlx_image_t *player;
-	t_vec2d p = {64 / 3, 64 / 3};
+	t_param *param;
 
-	char map[][16] = {
-		{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-		{'1', '0', '0', '0', '0', '1', '1', '1', '0', '1', '0', '0', '1', '1', '0', '1'},
-		{'1', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '1', '1', '0', '1'},
-		{'1', '0', '0', '0', '0', '1', '1', '1', '0', '1', '0', '0', '1', '1', '0', '1'},
-		{'1', '0', 'W', '0', '0', '1', '1', '1', '0', '1', '0', '0', '1', '1', '0', '1'},
-		{'1', '0', '0', '0', '0', '0', '0', '1', '0', '1', '0', '0', '1', '1', '0', '1'},
-		{'1', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '1', '1', '0', '1'},
-		{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-	};
+	param = parser_and_error_check("./maps/map2.cub" );
+	print_map(param);
+
 	data = init_screen();
-	player = new_image_to_window(&data, vec2d(WIDTH / 2, HEIGHT / 2), vec2d(64, 64));
-	t_vec2d pos = mini_map_render(&data, map);
-	// f(&data, 1023, 511);
+	data.param = param;
+	t_vec2d pos = mini_map_render(&data, data.param->map_data);
+	// // f(&data, 1023, 511);
 
 	put_pixels(data.image, pos, vec2d(GRID_X / 3, GRID_Y / 3), 0x050C9CFF);
-	// put_pixels(data.image, vec2d(pos.x, pos.y),vec2d(4, 4), 0xFFFFFFFF);
-	t_vec2d pos2 = {.x = 64 * 8, .y = 64};
+	t_vec2d pos2 = {.x = 64 * 2, .y = 4 * GRID_Y};
 	data.pos = pos2;
-	// data.map = map;
+	// data.pos = pos2;
+	// // data.map = map;
 	put_point(&data, pos2);
 	t_vec2d point = pos;
 	for (int i = 0;i<6;i++)
 	{
-		point = ray_casting(&data, grid(point), grid(pos2));
+		point = ray_casting(grid(point), grid(pos2));
+		VEC(point)
 		put_point(&data, point);
 	}
 
-	// ray_casting(&data, grid(pos), grid(pos3));;
-	// for(double m = 0.5f; m < 100.0f;m += 0.5f){
-	// put_player_ray(player, p);
-	// }
+	// // ray_casting(&data, grid(pos), grid(pos3));;
+	// // for(double m = 0.5f; m < 100.0f;m += 0.5f){
+	// // put_player_ray(player, p);
+	// // }
 
 	mlx_key_hook(data.mlx, keybord, &data);
-	// mlx_loop_hook(data.mlx, ft_hook, &data);
+	// // mlx_loop_hook(data.mlx, ft_hook, &data);
 
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }
+// int main(int argc, char *argv[])
+// {
+// 	t_param *param;
+
+// 	param = parser_and_error_check(argv[1]);
+// 	t_map *data = param->map_data;
+// 	return EXIT_SUCCESS;
+// }

@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/01 16:56:05 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:19:21 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define HEIGHT 512
 # define GRID_X 64.0f
 # define GRID_Y 64.0f
-# define MOVE_SPEED 10
+# define MOVE_SPEED 5
 # define PI 3.14159265359
 
 # include <MLX42/MLX42.h>
@@ -70,14 +70,7 @@ typedef struct s_vec2f
 	double			y;
 }					t_vec2f;
 
-typedef struct s_data
-{
-	mlx_t			*mlx;
-	mlx_image_t		*image;
-	mlx_image_t		*player;
-	t_vec2d			pos;
-	char			map[][16];
-}					t_data;
+
 typedef struct s_map
 {
 	char			**map;
@@ -116,6 +109,16 @@ typedef struct s_param
 	t_map			*map_data;
 }					t_param;
 
+
+typedef struct s_data
+{
+	mlx_t			*mlx;
+	mlx_image_t		*image;
+	mlx_image_t		*player;
+	t_param			*param;
+	t_vec2d			pos;
+}					t_data;
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
@@ -149,6 +152,7 @@ t_vec2f				min_distance(t_vec2f a, t_vec2f b, t_vec2f origin);
 double				vec_distance(t_vec2f a, t_vec2f b);
 t_vec2f				line_eqution(t_vec2f v, t_vec2f u);
 t_vec2f				grid(t_vec2d vec);
+t_vec2d				pixel(t_vec2d vec);
 // int		verify_type(char *info, int *count);
 
 /*-----LIBFT-----*/
@@ -163,4 +167,7 @@ int					ft_atoi(const char *str);
 char				*ft_strtrim(char *str, char c);
 // mlx hooks
 void				keybord(mlx_key_data_t keydata, void *param);
+
+t_vec2d mini_map_render(t_data *data, t_map *map_data);
+void put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size, int color);
 #endif

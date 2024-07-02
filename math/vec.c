@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:21:45 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/01 16:51:57 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:19:16 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,9 @@ t_vec2f	min_distance(t_vec2f a, t_vec2f b, t_vec2f origin)
 t_vec2f grid(t_vec2d vec)
 {
 	return (vec2f(vec.x / GRID_X, vec.y / GRID_Y));
+}
+
+t_vec2d pixel(t_vec2d vec)
+{
+	return (vec2d(vec.x * GRID_X, vec.y * GRID_Y));
 }
