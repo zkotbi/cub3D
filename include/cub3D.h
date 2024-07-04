@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/02 22:06:38 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:26:08 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 # define CUB3D_H
 
 # include <MLX42/MLX42.h>
+# include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 
-# define WIDTH 1024
-# define HEIGHT 512
-# define GRID_X 64.0f
-# define GRID_Y 64.0f
+# define WIDTH 1600
+# define HEIGHT 1024
+# define CELLSIZE 64.0f
 # define MOVE_SPEED 1
 # define PI 3.14159265359
 # define eps 1e-3
+# define MAX_VIEW_POINT 1
 
 # include <MLX42/MLX42.h>
 # include <fcntl.h>
@@ -36,7 +36,8 @@
 
 # define VEC(v) printf("%s => (%d, %d)\n", #v, v.x, v.y);
 # define FVEC(v) printf("%s => (%lf, %lf)\n", #v, v.x, v.y);
-
+# define pair2f(x, y) printf("(%lf, %lf)\n", x, y);
+# define pair2d(x, y) printf("(%d, %d)\n", x, y);
 # define INT(x) printf("%s=>(%d)\n", #x, x);
 # define CHAR(x) printf("%s=>(%c)\n", #x, x);
 # define UINT(x) printf("%s=>(%u)\n", #x, x);
@@ -71,7 +72,6 @@ typedef struct s_vec2f
 	double			x;
 	double			y;
 }					t_vec2f;
-
 
 typedef struct s_map
 {
@@ -111,14 +111,13 @@ typedef struct s_param
 	t_map			*map_data;
 }					t_param;
 
-
 typedef struct s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*image;
 	mlx_image_t		*player;
 	t_param			*param;
-	t_vec2d			pos;
+	double			player_angle;
 }					t_data;
 
 # ifndef BUFFER_SIZE
@@ -155,8 +154,12 @@ double				vec_distance(t_vec2f a, t_vec2f b);
 t_vec2f				line_eqution(t_vec2f v, t_vec2f u);
 t_vec2f				grid(t_vec2d vec);
 t_vec2d				pixel(t_vec2d vec);
-t_vec2f direction(t_vec2d v, t_vec2d u);
-t_vec2f vec2dtf(t_vec2d v);
+t_vec2f				direction(double angle);
+t_vec2f				vec2dtf(t_vec2d v);
+double				sign(double n);
+/*ray Casting*/
+// t_vec2f				ray_casting(t_vec2f position, t_vec2f direction);
+t_vec2f				get_wall_postion(t_map *map_data,  t_vec2f player_position, double angle);
 // int		verify_type(char *info, int *count);
 
 /*-----LIBFT-----*/
@@ -172,6 +175,7 @@ char				*ft_strtrim(char *str, char c);
 // mlx hooks
 void				keybord(mlx_key_data_t keydata, void *param);
 
-t_vec2d mini_map_render(t_data *data, t_map *map_data);
-void put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size, int color);
+t_vec2d				mini_map_render(t_data *data, t_map *map_data);
+void				put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size,
+						int color);
 #endif

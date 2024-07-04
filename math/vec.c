@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:21:45 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/02 21:25:49 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:00:22 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,24 @@ t_vec2f	min_distance(t_vec2f a, t_vec2f b, t_vec2f origin)
 	return (b);
 }
 
-t_vec2f grid(t_vec2d vec)
+t_vec2f	grid(t_vec2d vec)
 {
-	return (vec2f(vec.x / GRID_X, vec.y / GRID_Y));
+	return (vec2f(vec.x / CELLSIZE, vec.y / CELLSIZE));
 }
 
-t_vec2d pixel(t_vec2d vec)
+t_vec2d	pixel(t_vec2d vec)
 {
-	return (vec2d(vec.x * GRID_X, vec.y * GRID_Y));
+	return (vec2d(vec.x * CELLSIZE, vec.y * CELLSIZE));
 }
-t_vec2f direction(t_vec2d v, t_vec2d u)
+t_vec2f	direction(double angle)
 {
-	return (vec2f(u.x - v.x, u.y - v.y));
+	double	rad;
+
+	rad = angle * (PI / 180);
+	return (vec2f(cos(rad), sin(rad)));
 }
 
-t_vec2f vec2dtf(t_vec2d v)
+t_vec2f	vec2dtf(t_vec2d v)
 {
 	return (vec2f(v.x, v.y));
 }
