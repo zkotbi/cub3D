@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/10 17:30:21 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/08 09:33:19 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void put_point_grid(t_data *data, t_vec2f point, int color)
 {
-	t_vec2d vec;
+	t_vec2d	vec;
 
 	vec = vec2d(point.x * CELLSIZE, point.y * CELLSIZE);
 	put_pixels(data->image, vec, vec2d(5, 5), color);

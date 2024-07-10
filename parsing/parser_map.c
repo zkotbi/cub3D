@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:43:25 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/27 16:23:47 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/07/10 17:27:36 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void init_map_data(t_map *map)
 	int j;
 
 	i = 0;
-	map->pos = malloc(sizeof(t_vec2d));
-	malloc_null_check(map->pos);
-	map->sizes = malloc(sizeof(t_vec2d));
-	malloc_null_check(map->sizes);
+	// map->pos = malloc(sizeof(t_vec2f));
+	// malloc_null_check(map->pos);
+	// map->sizes = malloc(sizeof(t_vec2d));
+	// malloc_null_check(map->sizes);
 	while (map->map[i] != NULL)
 	{
 		j = 0;
@@ -72,15 +72,15 @@ void init_map_data(t_map *map)
 					map->init_direc = EAST;
 				else if (map->map[i][j] == 'S')
 					map->init_direc = SOUTH;
-				map->pos->x = j;
-				map->pos->y = i;
+				map->pos.x = j;
+				map->pos.y = i;
 			}
 			j++;
 		}
 		i++;
 	}
-	map->sizes->x = j;
-	map->sizes->y = i;
+	map->sizes.x = j;
+	map->sizes.y = i;
 }
 
 void parser_map(t_param *param, t_lst *lst)
