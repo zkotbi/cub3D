@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/04 14:26:08 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:37:25 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,21 @@
 
 # define WIDTH 1600
 # define HEIGHT 1024
-# define CELLSIZE 64.0f
-# define MOVE_SPEED 1
-# define PI 3.14159265359
-# define eps 1e-3
+# define CELLSIZE 32.0f
+# define ROTATE_SEEP 2
+# define PI 3.14159265359f
+# define eps 1e-4
 # define MAX_VIEW_POINT 1
+# define FOV 66.0f
+# define DIR_LENGTH 2.0f
+#define enforce(condition) \
+    do { \
+        if (!(condition)) { \
+            fprintf(stderr, "Assertion failed: (%s), function %s, file %s, line %d.\n", \
+                    #condition, __FUNCTION__, __FILE__, __LINE__); \
+            exit(EXIT_FAILURE); \
+        } \
+    } while (0)
 
 # include <MLX42/MLX42.h>
 # include <fcntl.h>
@@ -44,6 +54,10 @@
 # define STR(x) printf("%s=>(%s)\n", #x, x);
 # define FINT(x) printf("%s=>(%lf)\n", #x, x);
 
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 enum				param_type
 {
 	CELLING,
@@ -98,6 +112,7 @@ typedef struct s_color
 	int				red;
 	int				green;
 	int				blue;
+
 }					t_color;
 
 typedef struct s_param
@@ -120,9 +135,7 @@ typedef struct s_data
 	double			player_angle;
 }					t_data;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
+
 
 /*---------------FREE---------------*/
 void				free_tokens(t_token *tokens, t_lst *content);
@@ -157,9 +170,16 @@ t_vec2d				pixel(t_vec2d vec);
 t_vec2f				direction(double angle);
 t_vec2f				vec2dtf(t_vec2d v);
 double				sign(double n);
+double				max(double a, double b);
+double				min(double a, double b);
+t_vec2f				scale(t_vec2f vec, double scalar);
+t_vec2f				mul(t_vec2f v, t_vec2f u);
+t_vec2f				lerp(t_vec2f v, t_vec2f u, double alpha);
+
 /*ray Casting*/
 // t_vec2f				ray_casting(t_vec2f position, t_vec2f direction);
-t_vec2f				get_wall_postion(t_map *map_data,  t_vec2f player_position, double angle);
+t_vec2f				get_wall_postion(t_map *map_data, t_vec2f player_position,
+						double angle);
 // int		verify_type(char *info, int *count);
 
 /*-----LIBFT-----*/

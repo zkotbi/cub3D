@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:21:45 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/03 16:00:22 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:34:21 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,23 @@ t_vec2f	direction(double angle)
 t_vec2f	vec2dtf(t_vec2d v)
 {
 	return (vec2f(v.x, v.y));
+}
+
+t_vec2f scale(t_vec2f v, double scalar)
+{
+	return (vec2f(v.x * scalar, v.y * scalar));
+}
+
+t_vec2f mul(t_vec2f v, t_vec2f u)
+{
+	return (vec2f(v.x * u.x, v.y * u.y));
+}
+// a + (b - a) * t
+t_vec2f lerp(t_vec2f v, t_vec2f u, double alpha)
+{
+	t_vec2f	uv;
+
+	uv.x = v.x + (u.x -v.x) * alpha;
+	uv.y = v.y + (u.y -v.y) * alpha;
+	return (uv);
 }

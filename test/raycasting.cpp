@@ -1,4 +1,4 @@
-#include <stdio.h>
+
 
 // Structure to represent a point in 2D space
 typedef struct {

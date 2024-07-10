@@ -6,15 +6,11 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/04 14:59:10 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:31:49 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <assert.h>
-#include <math.h>
-#include <stdint.h>
-#include <stdio.h>
-#include "MLX42/MLX42.h"
+
 #include "cub3D.h"
 
 
@@ -105,6 +101,11 @@ void print_map(t_param *param)
 	}
 }
 
+
+
+
+
+
 int main(int ac, char **argv)
 {
 	(void)ac;
@@ -116,7 +117,7 @@ int main(int ac, char **argv)
 
 	data = init_screen();
 	data.param = param;
-	mini_map_render(&data, data.param->map_data);
+	// mini_map_render(&data, data.param->map_data);
 	mlx_key_hook(data.mlx, keybord, &data);
 
 	mlx_loop(data.mlx);
