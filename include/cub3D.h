@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/04 14:26:08 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:44:03 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <MLX42/MLX42.h>
 # include <math.h>
 # include <stdbool.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -76,9 +77,8 @@ typedef struct s_vec2f
 typedef struct s_map
 {
 	char			**map;
-	t_vec2d			*sizes;
-	t_vec2d			*pos;
-	// t_data			*data;
+	t_vec2d			sizes;
+	t_vec2f			pos;
 	enum param_type	init_direc;
 }					t_map;
 
@@ -95,15 +95,16 @@ typedef struct s_token
 
 typedef struct s_color
 {
-	int				red;
-	int				green;
-	int				blue;
+	uint8_t			red;
+	uint8_t			green;
+	uint8_t			blue;
+	uint8_t			alpha;
 }					t_color;
 
 typedef struct s_param
 {
-	t_color			*floor_color;
-	t_color			*celling_color;
+	t_color			floor_color;
+	t_color			celling_color;
 	char			*north_texture;
 	char			*south_texture;
 	char			*west_texture;
@@ -159,7 +160,8 @@ t_vec2f				vec2dtf(t_vec2d v);
 double				sign(double n);
 /*ray Casting*/
 // t_vec2f				ray_casting(t_vec2f position, t_vec2f direction);
-t_vec2f				get_wall_postion(t_map *map_data,  t_vec2f player_position, double angle);
+t_vec2f				get_wall_postion(t_map *map_data, t_vec2f player_position,
+						double angle);
 // int		verify_type(char *info, int *count);
 
 /*-----LIBFT-----*/

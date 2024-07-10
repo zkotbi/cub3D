@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/04 14:59:10 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:40:49 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ t_vec2d mini_map_render(t_data *data, t_map *map_data)
 	char **map;
 
 	map = map_data->map;
-	for (int i = 0; i < map_data->sizes->y; i++)
+	for (int i = 0; i < map_data->sizes.y; i++)
 	{
-		for (int j = 0; j < map_data->sizes->x; j++)
+		for (int j = 0; j < map_data->sizes.x; j++)
 		{
 			if (map[i][j] == '1')
 				put_pixels(
@@ -96,10 +96,10 @@ void print_map(t_param *param)
 	t_map *map_data = param->map_data;
 
 	char **map = map_data->map;
-	for (int i = 0; i < map_data->sizes->y; i++)
+	for (int i = 0; i < map_data->sizes.y; i++)
 	{
 		printf("|");
-		for (int j = 0; j < map_data->sizes->x; j++)
+		for (int j = 0; j < map_data->sizes.x; j++)
 			printf("%c", map[i][j]);
 		printf("|\n");
 	}
@@ -112,14 +112,15 @@ int main(int ac, char **argv)
 	t_param *param;
 
 	param = parser_and_error_check("./maps/map2.cub");
+	printf("%d, %d, %d, %d\n", param->floor_color.red, param->floor_color.green, param->floor_color.blue, param->floor_color.alpha);
 	print_map(param);
 
-	data = init_screen();
-	data.param = param;
-	mini_map_render(&data, data.param->map_data);
-	mlx_key_hook(data.mlx, keybord, &data);
+	// data = init_screen();
+	// data.param = param;
+	// mini_map_render(&data, data.param->map_data);
+	// mlx_key_hook(data.mlx, keybord, &data);
 
-	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
+	// mlx_loop(data.mlx);
+	// mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }
