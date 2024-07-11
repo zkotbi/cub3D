@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/10 17:40:49 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/07/10 18:15:32 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ void put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size, int color)
 }
 
 // refactor this later from mini map
-t_vec2d mini_map_render(t_data *data, t_map *map_data)
+void mini_map_render(t_data *data, t_map *map_data)
 {
-	t_vec2d pos = {0};
 	char **map;
 
 	map = map_data->map;
@@ -74,7 +73,6 @@ t_vec2d mini_map_render(t_data *data, t_map *map_data)
 					data->image, vec2d(j * CELLSIZE, i * CELLSIZE), vec2d(CELLSIZE - 1, CELLSIZE - 1), 0xFFFFFFFF);
 			else if (map[i][j] == 'W')
 			{
-				pos = vec2d(j * CELLSIZE, i * CELLSIZE);
 				put_pixels(
 					data->image, vec2d(j * CELLSIZE, i * CELLSIZE), vec2d(CELLSIZE - 1, CELLSIZE - 1), 0xFF8F00ff);
 			}
@@ -83,7 +81,6 @@ t_vec2d mini_map_render(t_data *data, t_map *map_data)
 					data->image, vec2d(j * CELLSIZE, i * CELLSIZE), vec2d(CELLSIZE - 1, CELLSIZE - 1), 0xFF8F00ff);
 		}
 	}
-	return (pos);
 }
 
 
@@ -121,7 +118,7 @@ int main(int ac, char **argv)
 	// mini_map_render(&data, data.param->map_data);
 	mlx_key_hook(data.mlx, keybord, &data);
 
-	// mlx_loop(data.mlx);
-	// mlx_terminate(data.mlx);
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }

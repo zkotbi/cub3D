@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/10 17:44:03 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/07/10 18:15:53 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH 1600
 # define HEIGHT 1024
 # define CELLSIZE 32.0f
-# define ROTATE_SEEP 2
+# define ROTATE_SEEP 1
 # define PI 3.14159265359f
 # define eps 1e-4
 # define MAX_VIEW_POINT 1
@@ -195,7 +195,7 @@ char				*ft_strtrim(char *str, char c);
 // mlx hooks
 void				keybord(mlx_key_data_t keydata, void *param);
 
-t_vec2d				mini_map_render(t_data *data, t_map *map_data);
+void				mini_map_render(t_data *data, t_map *map_data);
 void				put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size,
 						int color);
 #endif

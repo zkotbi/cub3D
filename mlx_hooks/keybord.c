@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/08 09:33:19 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/07/10 18:17:11 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void ver_line(t_data *data, int x, int start, int end, int color)
 		start++;
 	}
 }
-void color_floor_ceil(t_data *data, int fcolor, int ccolor)
+
+void color_floor_ceiling(t_data *data, int fcolor, int ccolor)
 {
 	const uint32_t half = data->image->height / 2;
 
@@ -100,22 +101,19 @@ void color_floor_ceil(t_data *data, int fcolor, int ccolor)
 void keybord(mlx_key_data_t keydata, void *param)
 {
 	t_data *data;
-	t_vec2d pos;
 	t_vec2f point;
-	t_vec2d p;
 
 	data = param;
 	if (MLX_KEY_ESCAPE == keydata.key)
 		mlx_close_window(data->mlx);
-	if (keydata.key == MLX_KEY_LEFT)
+	if (keydata.key == MLX_KEY_RIGHT)
 		data->player_angle = (data->player_angle < 360) * (data->player_angle + ROTATE_SEEP);
-	else if (keydata.key == MLX_KEY_RIGHT)
+	else if (keydata.key == MLX_KEY_LEFT)
 		data->player_angle =
 			(data->player_angle >= 0) * (data->player_angle - ROTATE_SEEP) + (data->player_angle < 0) * 360;
-	color_floor_ceil(data, 0x987D9Aff, 0xEECEB9FF);
-	pos  =mini_map_render(data, data->param->map_data);
-	// pos = *data->param->map_data->pos;
-	point = grid(pos);
+	color_floor_ceiling(data, 0x987D9Aff, 0xEECEB9FF);
+	mini_map_render(data, data->param->map_data);
+	point = data->param->map_data->pos;
 	t_vec2f tmp = point;
 
 	double delta = FOV / (WIDTH - 1);
