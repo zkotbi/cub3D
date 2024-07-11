@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/11 09:11:43 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:46:24 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@
 
 # define WIDTH 1600
 # define HEIGHT 1024
-# define CELLSIZE 32.0f
-# define ROTATE_SEEP 3
-# define PI 3.14159265359f
+# define CELLSIZE 24.0f
+# define ROTATE_SEEP 2
+# define MOVE_SEEP 0.08f
+# define MIN_DISTANCE 0.2f
+# define PI 3.14159265359f 
 # define eps 1e-4
 # define MAX_VIEW_POINT 1
 # define FOV 66.0f
-# define DIR_LENGTH 2.0f
+# define COLLISIONS_ANGLE 2.0f
+# define DIR_LENGTH 1.0f
 #define enforce(condition) \
     do { \
         if (!(condition)) { \
@@ -43,7 +46,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
+#include <unistd.h>
 
 # define VEC(v) printf("%s => (%d, %d)\n", #v, v.x, v.y);
 # define FVEC(v) printf("%s => (%lf, %lf)\n", #v, v.x, v.y);
@@ -61,13 +64,22 @@
 # endif
 enum				param_type
 {
-	CELLING,
-	FLOOR,
-	NORTH  = 270,
-	SOUTH = 90,
+	CELLING = 1,
+	FLOOR = 2,
+
 	EAST = 0,
+	SOUTH = 90,
 	WEST = 180,
+	NORTH  = 270,
 };
+enum e_move_dir
+{
+	FRONT,
+	BACK,
+	RIGHT,
+	LEFT
+};
+
 typedef struct s_lst
 {
 	char			*content;
@@ -130,7 +142,7 @@ typedef struct s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*image;
-	mlx_image_t		*player;
+	mlx_image_t		*min_map;
 	t_param			*param;
 	double			player_angle;
 }					t_data;
@@ -173,8 +185,7 @@ double				sign(double n);
 double				max(double a, double b);
 double				min(double a, double b);
 t_vec2f				scale(t_vec2f vec, double scalar);
-t_vec2f				mul(t_vec2f v, t_vec2f u);
-t_vec2f				lerp(t_vec2f v, t_vec2f u, double alpha);
+t_vec2f				mul2f(t_vec2f v, t_vec2f u);
 
 /*ray Casting*/
 // t_vec2f				ray_casting(t_vec2f position, t_vec2f direction);
@@ -195,7 +206,7 @@ char				*ft_strtrim(char *str, char c);
 // mlx hooks
 void				keybord(mlx_key_data_t keydata, void *param);
 
-void				mini_map_render(t_data *data, t_map *map_data);
+void				render_min_map(t_data *data, t_map *map_data);
 void				put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size,
 						int color);
 #endif
