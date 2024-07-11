@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/10 18:15:53 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 09:11:43 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH 1600
 # define HEIGHT 1024
 # define CELLSIZE 32.0f
-# define ROTATE_SEEP 1
+# define ROTATE_SEEP 3
 # define PI 3.14159265359f
 # define eps 1e-4
 # define MAX_VIEW_POINT 1
@@ -63,10 +63,10 @@ enum				param_type
 {
 	CELLING,
 	FLOOR,
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
+	NORTH  = 270,
+	SOUTH = 90,
+	EAST = 0,
+	WEST = 180,
 };
 typedef struct s_lst
 {

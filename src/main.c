@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/10 18:15:32 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 09:13:35 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void mini_map_render(t_data *data, t_map *map_data)
 			if (map[i][j] == '1')
 				put_pixels(
 					data->image, vec2d(j * CELLSIZE, i * CELLSIZE), vec2d(CELLSIZE - 1, CELLSIZE - 1), 0xFFFFFFFF);
-			else if (map[i][j] == 'W')
+			else if (map[i][j] == 'W' || map[i][j] == 'E' ||map[i][j] == 'N'||map[i][j] == 'S' )
 			{
 				put_pixels(
 					data->image, vec2d(j * CELLSIZE, i * CELLSIZE), vec2d(CELLSIZE - 1, CELLSIZE - 1), 0xFF8F00ff);
@@ -115,6 +115,7 @@ int main(int ac, char **argv)
 
 	data = init_screen();
 	data.param = param;
+	data.player_angle = param->map_data->init_direc;
 	// mini_map_render(&data, data.param->map_data);
 	mlx_key_hook(data.mlx, keybord, &data);
 

@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:03:21 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/10 13:15:20 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 09:00:58 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static t_vec2f	ray_casting(t_vec2f position, t_vec2f direction)
 }
 
 // this may break
+
 static int	hitting_wall(t_vec2f p1, const t_vec2f d, t_map *map_data)
 {
 	const int	x = floor(p1.x + eps * sign(d.x));
