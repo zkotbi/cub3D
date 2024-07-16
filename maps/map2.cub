@@ -1,20 +1,21 @@
-NO ./path_to_the_north_texture
+NO wall_texture.png
 
-SO ./path_to_the_south_texture
+SO hbenouka.png
 
-WE ./path_to_the_west_texture
+WE blue_wall.png
 
-EA ./path_to_the_east_texture
+EA hicham.png
 
-F 220,100,0
+C 233,255,151
 
-C 225,30,0
+F 193,53,69
 
-11111111
-11000001
-10000001
-11000W01
-11000001
-11010011
-11010011
-11111111
+
+111111111
+100000001
+100000001
+100010W01
+100000001
+111110011
+111110011
+111111111

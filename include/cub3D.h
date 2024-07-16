@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/11 09:11:43 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:38:21 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define pair2f(x, y) printf("(%lf, %lf)\n", x, y);
 # define pair2d(x, y) printf("(%d, %d)\n", x, y);
 # define INT(x) printf("%s=>(%d)\n", #x, x);
+# define HEX(x) printf("%s=>(%x)\n", #x, x);
 # define CHAR(x) printf("%s=>(%c)\n", #x, x);
 # define UINT(x) printf("%s=>(%u)\n", #x, x);
 # define STR(x) printf("%s=>(%s)\n", #x, x);
@@ -75,6 +76,13 @@ typedef struct s_lst
 	struct s_lst	*prev;
 	long size; // ONLY FOR MAP
 }					t_lst;
+
+typedef struct s_draw
+{
+	int x_pos;
+	mlx_image_t *img;
+	double distance;
+} t_draw;
 
 typedef struct s_vec2d
 {
@@ -109,10 +117,10 @@ typedef struct s_token
 
 typedef struct s_color
 {
-	uint8_t			red;
-	uint8_t			green;
-	uint8_t			blue;
 	uint8_t			alpha;
+	uint8_t			blue;
+	uint8_t			green;
+	uint8_t			red;
 }					t_color;
 
 typedef struct s_param
@@ -126,6 +134,23 @@ typedef struct s_param
 	t_map			*map_data;
 }					t_param;
 
+typedef struct s_text 
+{
+    mlx_texture_t *north;
+    mlx_texture_t *south;
+	mlx_texture_t *east;
+    mlx_texture_t *west;
+
+} t_text;
+
+typedef struct s_img
+{
+	mlx_image_t	*north;
+	mlx_image_t	*south;
+	mlx_image_t	*east;
+	mlx_image_t	*west;
+}  t_img;
+
 typedef struct s_data
 {
 	mlx_t			*mlx;
@@ -133,15 +158,20 @@ typedef struct s_data
 	mlx_image_t		*player;
 	t_param			*param;
 	double			player_angle;
+	t_img		*texture;
 }					t_data;
 
 
+/*---------------TEXTURES---------------*/
+void				get_texture(t_data *data);
 
 /*---------------FREE---------------*/
 void				free_tokens(t_token *tokens, t_lst *content);
 void				free_tab(char **tab);
 void				free_lst(t_lst *lst);
 void				free_param(t_param *param);
+void				destroy_texture(t_text *texture, int n);
+void				destroy_img(t_img *img, mlx_t *mlx, int n, t_text *text);
 
 /*-----parsing_and_error_handle-----*/
 t_param				*parser_and_error_check(char *argv);

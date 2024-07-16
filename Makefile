@@ -6,7 +6,7 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/07/02 21:30:27 by hibenouk         ###   ########.fr        #
+#    Updated: 2024/07/16 11:09:47 by zkotbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ NAME        = cub3D
 
 CC          = cc
 
-INC         = -Iinclude -I$(HOME)/.brew/include
+INC         = -Iinclude -I$(HOME)/.brew/include       
 
-CFLAGS      = -Wall -Wextra -g3 -ggdb -fsanitize=address $(INC) 
+CFLAGS      = -Wall -Wextra -g3 -ggdb -fsanitize=address $(INC)    
 
 OBJ_DIR     = ./obj/
 

@@ -6,15 +6,14 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/11 09:13:35 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/16 13:03:24 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "MLX42/MLX42.h"
 #include "cub3D.h"
-
-
-
+// #include <cstdio>
+#include <stdint.h>
 
 mlx_image_t *new_image_to_window(t_data *data, t_vec2d pos, t_vec2d size)
 {
@@ -34,6 +33,44 @@ mlx_image_t *new_image_to_window(t_data *data, t_vec2d pos, t_vec2d size)
 	}
 	return (image);
 }
+
+// void load_png(t_text *texture, t_param *param)
+// {
+// 	texture->north = mlx_load_png(param->north_texture);
+// 	if (texture->north == NULL)
+// 	{
+// 		destroy_texture(texture, 1);
+// 		exit_strerror("mlx_load_png failed\n", 1);
+// 	}
+// 	texture->south = mlx_load_png(param->south_texture);
+// 	if (texture->south == NULL)
+// 	{
+// 		destroy_texture(texture, 2);
+// 		exit_strerror("mlx_load_png failed\n", 1);
+// 	}
+// 	texture->east = mlx_load_png(param->east_texture);
+// 	if (texture->east == NULL)
+// 	{
+// 		destroy_texture(texture, 3);
+// 		exit_strerror("mlx_load_png failed\n", 1);
+// 	}
+// 	texture->west = mlx_load_png(param->west_texture);
+// 	if (texture->west == NULL)
+// 	{
+// 		destroy_texture(texture, 4);
+// 		exit_strerror("mlx_load_png failed\n", 1);
+// 	}
+// }
+
+// void get_texture(t_data *data)
+// {
+// 	t_text textures;
+// 	
+// 	load_png(&textures, data->param);
+// 	data->texture = malloc(sizeof(textures));
+// 	malloc_null_check(data->texture);
+// 	load_img(data->texture, &textures);
+// }
 
 t_data init_screen(void)
 {
@@ -99,10 +136,6 @@ void print_map(t_param *param)
 }
 
 
-
-
-
-
 int main(int ac, char **argv)
 {
 	(void)ac;
@@ -115,7 +148,10 @@ int main(int ac, char **argv)
 
 	data = init_screen();
 	data.param = param;
+	data.param->map_data->pos.x += 0.3f;
+	data.param->map_data->pos.y += 0.3f;
 	data.player_angle = param->map_data->init_direc;
+	get_texture(&data);
 	// mini_map_render(&data, data.param->map_data);
 	mlx_key_hook(data.mlx, keybord, &data);
 
