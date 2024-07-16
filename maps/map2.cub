@@ -1,10 +1,10 @@
-NO wall_texture.png
+WE image/wall_texture.png
 
-SO hbenouka.png
+SO image/hbenouka.png
 
-WE blue_wall.png
+NO image/zaid.png
 
-EA hicham.png
+EA image/hicham.png
 
 C 233,255,151
 

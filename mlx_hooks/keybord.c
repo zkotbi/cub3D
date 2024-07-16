@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/16 16:03:06 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:12:36 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,8 @@ int check_collisions(t_data *data, double mov_ang)
 	{
 		point = get_wall_postion(data->param->map_data, point, l);
 		distance = vec_distance(data->param->map_data->pos, point);
-		// enforce(condition)
 		if (distance <= MIN_DISTANCE)
-		{
-			FINT(distance)
-
 			return (1);
-		}
 		l++;
 	}
 	return (0);
