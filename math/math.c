@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:51:46 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/08 17:07:59 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 14:51:16 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@ double sign(double n)
 	return ((n >= 0) - (n < 0));
 }
 
-double max(double a, double b)
+int max(int a, int b)
 {
-	if (a > b)
-		return (a);
-	return (b);
+	return (a * (a >= b) + (a < b) * b );
 }
 
-double min(double a, double b)
+int min(int a, int b)
 {
-	if (a > b)
-		return (a);
-	return (b);
+	return (a * (a <= b) + (a > b) * b );
 }

@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:03:21 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/11 09:00:58 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 12:36:51 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static double	snap(double x, double dx)
 {
 	if (dx > 0)
-		return (ceil(x + sign(dx) * eps));
+		return (ceil(x + sign(dx) * EPS));
 	else if (dx < 0)
-		return (floor(x + sign(dx) * eps));
+		return (floor(x + sign(dx) * EPS));
 	return (x);
 }
 
@@ -63,8 +63,8 @@ static t_vec2f	ray_casting(t_vec2f position, t_vec2f direction)
 
 static int	hitting_wall(t_vec2f p1, const t_vec2f d, t_map *map_data)
 {
-	const int	x = floor(p1.x + eps * sign(d.x));
-	const int	y = floor(p1.y + eps * sign(d.y));
+	const int	x = floor(p1.x + EPS * sign(d.x));
+	const int	y = floor(p1.y + EPS * sign(d.y));
 
 	if (map_data->map[y][x] == '1')
 		return (1);

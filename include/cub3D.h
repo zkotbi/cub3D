@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/11 12:46:24 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/15 09:58:58 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,20 @@
 # define ROTATE_SEEP 2
 # define MOVE_SEEP 0.08f
 # define MIN_DISTANCE 0.2f
-# define PI 3.14159265359f 
-# define eps 1e-4
+# define PI 3.14159265359f
+# define EPS 1e-4
 # define MAX_VIEW_POINT 1
 # define FOV 66.0f
 # define COLLISIONS_ANGLE 2.0f
 # define DIR_LENGTH 1.0f
-#define enforce(condition) \
-    do { \
-        if (!(condition)) { \
-            fprintf(stderr, "Assertion failed: (%s), function %s, file %s, line %d.\n", \
-                    #condition, __FUNCTION__, __FILE__, __LINE__); \
-            exit(EXIT_FAILURE); \
-        } \
-    } while (0)
+# define MIN_MAP_X 5
+# define MIN_MAP_Y 3
 
 # include <MLX42/MLX42.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include <unistd.h>
+# include <unistd.h>
 
 # define VEC(v) printf("%s => (%d, %d)\n", #v, v.x, v.y);
 # define FVEC(v) printf("%s => (%lf, %lf)\n", #v, v.x, v.y);
@@ -58,10 +52,10 @@
 # define STR(x) printf("%s=>(%s)\n", #x, x);
 # define FINT(x) printf("%s=>(%lf)\n", #x, x);
 
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
+
 enum				param_type
 {
 	CELLING = 1,
@@ -70,9 +64,9 @@ enum				param_type
 	EAST = 0,
 	SOUTH = 90,
 	WEST = 180,
-	NORTH  = 270,
+	NORTH = 270,
 };
-enum e_move_dir
+enum				e_move_dir
 {
 	FRONT,
 	BACK,
@@ -138,16 +132,21 @@ typedef struct s_param
 	t_map			*map_data;
 }					t_param;
 
+typedef struct e_rng
+{
+	t_vec2d			v;
+	t_vec2d			h;
+
+}					t_rng;
 typedef struct s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*image;
 	mlx_image_t		*min_map;
 	t_param			*param;
+	t_rng			rng;
 	double			player_angle;
 }					t_data;
-
-
 
 /*---------------FREE---------------*/
 void				free_tokens(t_token *tokens, t_lst *content);
@@ -182,8 +181,8 @@ t_vec2d				pixel(t_vec2d vec);
 t_vec2f				direction(double angle);
 t_vec2f				vec2dtf(t_vec2d v);
 double				sign(double n);
-double				max(double a, double b);
-double				min(double a, double b);
+int				max(int a, int b);
+int				min(int a, int b);
 t_vec2f				scale(t_vec2f vec, double scalar);
 t_vec2f				mul2f(t_vec2f v, t_vec2f u);
 

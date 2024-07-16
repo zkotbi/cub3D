@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/11 12:36:29 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/15 10:09:54 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,10 +183,8 @@ void	keybord(mlx_key_data_t keydata, void *param)
 	{
 		angle += delta;
 		point = get_wall_postion(data->param->map_data, tmp, angle);
-		DDALine(data, pixels(tmp), pixels(point));
+		// DDALine(data, pixels(tmp), pixels(point));
 		distance = vec_distance(tmp, point);
-
-
 
 		lineHeight = (int)(HEIGHT / distance);
 		drawStart = -lineHeight / 2 + HEIGHT / 2;
