@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/16 15:30:17 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/07/16 15:52:03 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ t_vec2f				get_wall_postion(t_map *map_data, t_vec2f player_position,
 // int		verify_type(char *info, int *count);
 
 void				ver_line(t_data *data, int x, t_draw *draw);
-void				color_floor_ceiling(t_data *data, int fcolor, int ccolor);
+void				color_floor_ceiling(t_data *data);
 int					get_tex_x(t_vec2f point, double angle, mlx_image_t *img);
 mlx_image_t			*get_img_direc(t_vec2f point, t_data *data);
 /*-----LIBFT-----*/
@@ -232,4 +232,8 @@ void				keybord(mlx_key_data_t keydata, void *param);
 void				mini_map_render(t_data *data, t_map *map_data);
 void				put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size,
 						int color);
+
+/* game loop */
+
+void game(t_data *data, int width);
 #endif

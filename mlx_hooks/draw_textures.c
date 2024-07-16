@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:26:12 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/16 15:29:40 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/07/16 15:47:38 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,7 @@ void ver_line(t_data *data, int x, t_draw *draw)
 	}
 }
 
-void color_floor_ceiling(t_data *data, int fcolor, int ccolor)
-{
-	const uint32_t half = data->image->height / 2;
 
-
-	for (uint32_t i = 0;i<data->image->width;i++)
-	{
-		for (uint32_t j = 0;j<data->image->height;j++) 
-		{
-			if (j > half)
-				mlx_put_pixel(data->image, i, j, fcolor);
-			else
-				mlx_put_pixel(data->image, i, j, ccolor);
-		}
-	}
-
-}
 
 int get_side(t_vec2f point)
 {

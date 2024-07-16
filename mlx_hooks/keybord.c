@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/16 15:28:34 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/07/16 15:56:18 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,10 @@ void DDALine(t_data *data, t_vec2d v, t_vec2d u)
 	}
 }
 
+
 void keybord(mlx_key_data_t keydata, void *param)
 {
 	t_data *data;
-	t_vec2f point;
-	t_draw draw;
 
 	data = param;
 	if (MLX_KEY_ESCAPE == keydata.key)
@@ -89,52 +88,9 @@ void keybord(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_LEFT)
 		data->player_angle =
 			(data->player_angle >= 0) * (data->player_angle - ROTATE_SEEP) + (data->player_angle < 0) * 360;
-	int f = *(int *)&(data->param->floor_color);
-	int c = *(int *)&(data->param->celling_color);
-	color_floor_ceiling(data, f, c);
-	mini_map_render(data, data->param->map_data);
-	point = data->param->map_data->pos;
-	t_vec2f tmp = point;
 
-	double delta = FOV / (WIDTH - 1);
-	double angle = data->player_angle - FOV / 2;
-	for (int x = 0; x < WIDTH; x++)
-	{
-		angle += delta;
-		point = get_wall_postion(data->param->map_data, tmp, angle);
-		DDALine(data, pixels(tmp), pixels(point));
-	    draw.distance = vec_distance(tmp, point);
-		draw.img = get_img_direc(point, data);
-		draw.x_pos = get_tex_x(point, angle, draw.img);
-		ver_line(data, x, &draw);
-	}
+	game(data, WIDTH);
+
+
 }
 
-// uint32_t color = 0;// ft_pixel(img->pixels[(5 & 63) * 64 + 5], img->pixels[5& 63 * 64 + 1], img->pixels[5&63 * 64 + 2], 255);
-// int side = get_side(point);
-// INT(side)
-// get_dir(angle);
-// printf("%f\n", angle);
-// printf("%x\n", color);
-// ver_line(data, x, drawStart, drawEnd, 0x1A5319FF);
-// printf("%f-%f\n", point.x, point.y);
-// if (get_side(point) == 0)
-// 	wall_x = point.y ;//+ distance * direction(angle).x;
-// else 
-// 	wall_x = point.x ;//+ distance * direction(angle).y;
-
-// wall_x -= floor(wall_x);
-
-// int texX = (int)(wall_x * (double)(img->width));
-// if ((direction(angle).x < 0 && get_side(point) == 0) 
-// 	|| (direction(angle).y > 0 && get_side(point) == 1)) 
-// 	texX = img->width - texX - 1;
-// if (get_side(point) == 0 && )
-// FINT(wall_x)
-// INT(wall.x)
-// Starting texture coordinate color = img->pixels[start & 63 * 64 + x1];
-// printf("%x\n", color);
-// color = ft_pixel(img->pixels[((int)start & 63) * 64  +5], img->pixels[(int)start&63 * 64  + 6],
-// 		img->pixels[(int)start&63 * 64  + 7], 255);
-// color = ft_pixel(img->pixels[texY* (int)img->height + x1], img->pixels[texY * (int)img->height + x1+1], 
-// 		img->pixels[texY * (int)img->height + x1+ 2], 255);
