@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 12:03:21 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/13 12:36:51 by hibenouk         ###   ########.fr       */
+/*   Created: 2024/07/16 16:01:47 by hibenouk          #+#    #+#             */
+/*   Updated: 2024/07/16 16:01:49 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "cub3D.h"
 
@@ -51,7 +53,6 @@ static t_vec2f	ray_casting(t_vec2f position, t_vec2f direction)
 		return (get_point(position, direction));
 	else
 	{
-		exit(2);
 		vec.y = snap(position.y, direction.y);
 		vec.x = position.x;
 		return (vec);

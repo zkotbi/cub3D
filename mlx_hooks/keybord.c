@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/15 10:09:54 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:03:06 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,9 @@ void	DDALine(t_data *data, t_vec2d v, t_vec2d u)
 		y += y_incr;
 	}
 }
-void	ver_line(t_data *data, int x, int start, int end, int color)
-{
-	while (start <= end)
-	{
-		mlx_put_pixel(data->image, x, start, color);
-		start++;
-	}
-}
 
-void	color_floor_ceiling(t_data *data, int fcolor, int ccolor)
-{
-	const uint32_t	half = data->image->height / 2;
 
-	for (uint32_t i = 0; i < data->image->width; i++)
-	{
-		for (uint32_t j = 0; j < data->image->height; j++)
-		{
-			if (j > half)
-				mlx_put_pixel(data->image, i, j, fcolor);
-			else
-				mlx_put_pixel(data->image, i, j, ccolor);
-		}
-	}
-}
+
 
 t_vec2f rotate(double angle)
 {
@@ -143,17 +122,12 @@ void	move_player(t_data *data, enum e_move_dir dir)
 }
 
 
-void	keybord(mlx_key_data_t keydata, void *param)
+
+
+
+void keybord(mlx_key_data_t keydata, void *param)
 {
-	t_data	*data;
-	t_vec2f	point;
-	t_vec2f	tmp;
-	double	delta;
-	double	angle;
-	double	distance;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	t_data *data;
 
 	data = param;
 	if (MLX_KEY_ESCAPE == keydata.key)
@@ -173,26 +147,7 @@ void	keybord(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_A)
 		move_player(data, RIGHT);
 
-	color_floor_ceiling(data, 0x987D9Aff, 0xEECEB9FF);
-	render_min_map(data, data->param->map_data);
-	point = data->param->map_data->pos;
-	tmp = point;
-	delta = FOV / (WIDTH - 1);
-	angle = data->player_angle - FOV / 2;
-	for (int x = 0; x < WIDTH; x++)
-	{
-		angle += delta;
-		point = get_wall_postion(data->param->map_data, tmp, angle);
-		// DDALine(data, pixels(tmp), pixels(point));
-		distance = vec_distance(tmp, point);
+	game(data, WIDTH);
 
-		lineHeight = (int)(HEIGHT / distance);
-		drawStart = -lineHeight / 2 + HEIGHT / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		drawEnd = lineHeight / 2 + HEIGHT / 2;
-		if (drawEnd >= HEIGHT)
-			drawEnd = HEIGHT - 1;
-		ver_line(data, x, drawStart, drawEnd, 0x1A5319FF);
-	}
 }
+

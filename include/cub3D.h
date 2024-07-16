@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
+/*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 23:29:00 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/15 09:58:58 by hibenouk         ###   ########.fr       */
+/*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
+/*   Updated: 2024/07/16 16:01:19 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -47,6 +49,7 @@
 # define pair2f(x, y) printf("(%lf, %lf)\n", x, y);
 # define pair2d(x, y) printf("(%d, %d)\n", x, y);
 # define INT(x) printf("%s=>(%d)\n", #x, x);
+# define HEX(x) printf("%s=>(%x)\n", #x, x);
 # define CHAR(x) printf("%s=>(%c)\n", #x, x);
 # define UINT(x) printf("%s=>(%u)\n", #x, x);
 # define STR(x) printf("%s=>(%s)\n", #x, x);
@@ -82,6 +85,13 @@ typedef struct s_lst
 	long size; // ONLY FOR MAP
 }					t_lst;
 
+typedef struct s_draw
+{
+	int x_pos;
+	mlx_image_t *img;
+	double distance;
+} t_draw;
+
 typedef struct s_vec2d
 {
 	int				x;
@@ -115,10 +125,10 @@ typedef struct s_token
 
 typedef struct s_color
 {
-	uint8_t			red;
-	uint8_t			green;
-	uint8_t			blue;
 	uint8_t			alpha;
+	uint8_t			blue;
+	uint8_t			green;
+	uint8_t			red;
 }					t_color;
 
 typedef struct s_param
@@ -138,6 +148,24 @@ typedef struct e_rng
 	t_vec2d			h;
 
 }					t_rng;
+
+typedef struct s_text 
+{
+    mlx_texture_t *north;
+    mlx_texture_t *south;
+	mlx_texture_t *east;
+    mlx_texture_t *west;
+
+} t_text;
+
+typedef struct s_img
+{
+	mlx_image_t	*north;
+	mlx_image_t	*south;
+	mlx_image_t	*east;
+	mlx_image_t	*west;
+}  t_img;
+
 typedef struct s_data
 {
 	mlx_t			*mlx;
@@ -146,13 +174,20 @@ typedef struct s_data
 	t_param			*param;
 	t_rng			rng;
 	double			player_angle;
+	t_img		*texture;
 }					t_data;
+
+
+/*---------------TEXTURES---------------*/
+void				get_texture(t_data *data);
 
 /*---------------FREE---------------*/
 void				free_tokens(t_token *tokens, t_lst *content);
 void				free_tab(char **tab);
 void				free_lst(t_lst *lst);
 void				free_param(t_param *param);
+void				destroy_texture(t_text *texture, int n);
+void				destroy_img(t_img *img, mlx_t *mlx, int n, t_text *text);
 
 /*-----parsing_and_error_handle-----*/
 t_param				*parser_and_error_check(char *argv);
@@ -192,6 +227,10 @@ t_vec2f				get_wall_postion(t_map *map_data, t_vec2f player_position,
 						double angle);
 // int		verify_type(char *info, int *count);
 
+void				ver_line(t_data *data, int x, t_draw *draw);
+void				color_floor_ceiling(t_data *data);
+int					get_tex_x(t_vec2f point, double angle, mlx_image_t *img);
+mlx_image_t			*get_img_direc(t_vec2f point, t_data *data);
 /*-----LIBFT-----*/
 void				fd_putstr(const char *str, int fd);
 char				*get_next_line(int fd);
@@ -208,4 +247,8 @@ void				keybord(mlx_key_data_t keydata, void *param);
 void				render_min_map(t_data *data, t_map *map_data);
 void				put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size,
 						int color);
+
+/* game loop */
+
+void game(t_data *data, int width);
 #endif
