@@ -6,7 +6,7 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/08/06 12:05:13 by hibenouk         ###   ########.fr        #
+#    Updated: 2024/08/06 12:52:52 by hibenouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC          = cc
 
 INC         = -Iinclude -I$(HOME)/.brew/include       
 
-CFLAGS      = -Wall -Wextra -Werror -fsanitize=address  $(INC)    
+CFLAGS      = -Wall -Wextra -Werror  $(INC)    
 
 OBJ_DIR     = ./obj/
 
@@ -25,7 +25,30 @@ SRC_DIR     = ./
 
 LIB =  -L$(HOME)/.brew/lib/ -lmlx42 -lglfw
 
-SRCS        = $(shell find $(SRC_DIR) -type f -name "*.c" | grep -v test)
+SRCS =  ./libft/ft_atoi.c \
+		./libft/ft_putstr.c \
+		./libft/ft_split.c \
+		./libft/ft_strtrim.c \
+		./libft/get_next_line.c \
+		./libft/get_next_line_utils.c \
+		./math/vec.c \
+		./math/vec2.c \
+		./mlx_hooks/draw_textures.c \
+		./mlx_hooks/keybord.c \
+		./parsing/error.c \
+		./parsing/error_handle_utils.c \
+		./parsing/free.c \
+		./parsing/get_param.c \
+		./parsing/init_textures.c \
+		./parsing/map_verification.c \
+		./parsing/parser_error_handle.c \
+		./parsing/parser_map.c \
+		./parsing/parsing.c \
+		./raycasting/raycasting.c \
+		./src/game.c \
+		./src/init.c \
+		./src/main.c 
+
 OBJS        = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 
