@@ -6,15 +6,13 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:47 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/16 16:01:49 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/06 09:57:59 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "cub3D.h"
 
-static double	snap(double x, double dx)
+static double	step(double x, double dx)
 {
 	if (dx > 0)
 		return (ceil(x + sign(dx) * EPS));
@@ -32,11 +30,11 @@ static t_vec2f	get_point(t_vec2f position, t_vec2f direction)
 
 	equ.x = direction.y / direction.x;
 	equ.y = position.y - position.x * equ.x;
-	uvec.x = snap(position.x, direction.x);
+	uvec.x = step(position.x, direction.x);
 	uvec.y = uvec.x * equ.x + equ.y;
 	if (equ.x != 0)
 	{
-		wvec.y = snap(position.y, direction.y);
+		wvec.y = step(position.y, direction.y);
 		wvec.x = (wvec.y - equ.y) / equ.x;
 	}
 	else
@@ -53,14 +51,12 @@ static t_vec2f	ray_casting(t_vec2f position, t_vec2f direction)
 		return (get_point(position, direction));
 	else
 	{
-		vec.y = snap(position.y, direction.y);
+		vec.y = step(position.y, direction.y);
 		vec.x = position.x;
 		return (vec);
 	}
 	return (vec2f(0, 0));
 }
-
-// this may break
 
 static int	hitting_wall(t_vec2f p1, const t_vec2f d, t_map *map_data)
 {

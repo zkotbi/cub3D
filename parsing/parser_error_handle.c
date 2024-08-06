@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 08:20:36 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/02 17:30:46 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/06 10:28:37 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ t_param *parser_and_error_check(char *argv)
 	tokens = tokeniz_file_content(file_content);
 	param = get_and_verify_param(tokens);
 	free_tokens(tokens, file_content);
-	// while(1){}
+	param->map_data->pos.x += 0.3f;
+	param->map_data->pos.y += 0.3f;
 	return (param);
 }
 

@@ -6,26 +6,22 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/07/16 16:01:19 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:43:29 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
 # include <MLX42/MLX42.h>
 # include <math.h>
-# include <stdbool.h>
-# include <stdint.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 # define WIDTH 1600
 # define HEIGHT 1024
-# define CELLSIZE 24.0f
 # define ROTATE_SEEP 2
 # define MOVE_SEEP 0.08f
 # define MIN_DISTANCE 0.2f
@@ -37,27 +33,7 @@
 # define DIR_LENGTH 1.0f
 # define MIN_MAP_X 5
 # define MIN_MAP_Y 3
-
-# include <MLX42/MLX42.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-# define VEC(v) printf("%s => (%d, %d)\n", #v, v.x, v.y);
-# define FVEC(v) printf("%s => (%lf, %lf)\n", #v, v.x, v.y);
-# define pair2f(x, y) printf("(%lf, %lf)\n", x, y);
-# define pair2d(x, y) printf("(%d, %d)\n", x, y);
-# define INT(x) printf("%s=>(%d)\n", #x, x);
-# define HEX(x) printf("%s=>(%x)\n", #x, x);
-# define CHAR(x) printf("%s=>(%c)\n", #x, x);
-# define UINT(x) printf("%s=>(%u)\n", #x, x);
-# define STR(x) printf("%s=>(%s)\n", #x, x);
-# define FINT(x) printf("%s=>(%lf)\n", #x, x);
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
+# define BUFFER_SIZE 10
 
 enum				param_type
 {
@@ -69,6 +45,7 @@ enum				param_type
 	WEST = 180,
 	NORTH = 270,
 };
+
 enum				e_move_dir
 {
 	FRONT,
@@ -82,15 +59,15 @@ typedef struct s_lst
 	char			*content;
 	struct s_lst	*next;
 	struct s_lst	*prev;
-	long size; // ONLY FOR MAP
+	long size;
 }					t_lst;
 
 typedef struct s_draw
 {
-	int x_pos;
-	mlx_image_t *img;
-	double distance;
-} t_draw;
+	int				x_pos;
+	mlx_image_t		*img;
+	double			distance;
+}					t_draw;
 
 typedef struct s_vec2d
 {
@@ -142,44 +119,37 @@ typedef struct s_param
 	t_map			*map_data;
 }					t_param;
 
-typedef struct e_rng
+
+typedef struct s_text
 {
-	t_vec2d			v;
-	t_vec2d			h;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+	mlx_texture_t	*west;
 
-}					t_rng;
-
-typedef struct s_text 
-{
-    mlx_texture_t *north;
-    mlx_texture_t *south;
-	mlx_texture_t *east;
-    mlx_texture_t *west;
-
-} t_text;
+}					t_text;
 
 typedef struct s_img
 {
-	mlx_image_t	*north;
-	mlx_image_t	*south;
-	mlx_image_t	*east;
-	mlx_image_t	*west;
-}  t_img;
+	mlx_image_t		*north;
+	mlx_image_t		*south;
+	mlx_image_t		*east;
+	mlx_image_t		*west;
+}					t_img;
 
 typedef struct s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*image;
-	mlx_image_t		*min_map;
 	t_param			*param;
-	t_rng			rng;
 	double			player_angle;
-	t_img		*texture;
+	t_img			*texture;
 }					t_data;
 
-
+t_data				init_data(char *path);
 /*---------------TEXTURES---------------*/
 void				get_texture(t_data *data);
+void				clean_exit(t_data *data);
 
 /*---------------FREE---------------*/
 void				free_tokens(t_token *tokens, t_lst *content);
@@ -216,8 +186,8 @@ t_vec2d				pixel(t_vec2d vec);
 t_vec2f				direction(double angle);
 t_vec2f				vec2dtf(t_vec2d v);
 double				sign(double n);
-int				max(int a, int b);
-int				min(int a, int b);
+int					max(int a, int b);
+int					min(int a, int b);
 t_vec2f				scale(t_vec2f vec, double scalar);
 t_vec2f				mul2f(t_vec2f v, t_vec2f u);
 
@@ -228,7 +198,6 @@ t_vec2f				get_wall_postion(t_map *map_data, t_vec2f player_position,
 // int		verify_type(char *info, int *count);
 
 void				ver_line(t_data *data, int x, t_draw *draw);
-void				color_floor_ceiling(t_data *data);
 int					get_tex_x(t_vec2f point, double angle, mlx_image_t *img);
 mlx_image_t			*get_img_direc(t_vec2f point, t_data *data);
 /*-----LIBFT-----*/
@@ -244,11 +213,7 @@ char				*ft_strtrim(char *str, char c);
 // mlx hooks
 void				keybord(mlx_key_data_t keydata, void *param);
 
-void				render_min_map(t_data *data, t_map *map_data);
-void				put_pixels(mlx_image_t *image, t_vec2d coord, t_vec2d size,
-						int color);
-
 /* game loop */
 
-void game(t_data *data, int width);
+void				game(t_data *data, int width);
 #endif

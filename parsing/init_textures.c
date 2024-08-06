@@ -6,10 +6,11 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:52:36 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/16 12:42:49 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/06 12:08:49 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "MLX42/MLX42.h"
 #include "cub3D.h"
 
 void load_png(t_text *texture, t_param *param)
@@ -45,25 +46,28 @@ void load_img(t_data *data, t_text *text)
 	data->texture->north = mlx_texture_to_image(data->mlx, text->north);
 	if (data->texture->north == NULL)
 	{
-		// destroy_img(data->texture, data->mlx, 1, text);
+		mlx_terminate(data->mlx);
 		exit_strerror("mlx_texture_to_image failed\n", 1);
 	}
 	data->texture->south = mlx_texture_to_image(data->mlx, text->south);
 	if (data->texture->south == NULL)
 	{
 		destroy_img(data->texture, data->mlx, 1, text);
+		mlx_terminate(data->mlx);
 		exit_strerror("mlx_texture_to_image failed\n", 1);
 	}
 	data->texture->east = mlx_texture_to_image(data->mlx, text->east);
 	if (data->texture->east == NULL)
 	{
 		destroy_img(data->texture, data->mlx, 2, text);
+		mlx_terminate(data->mlx);
 		exit_strerror("mlx_texture_to_image failed\n", 1);
 	}
 	data->texture->west = mlx_texture_to_image(data->mlx, text->west);
 	if (data->texture->west == NULL)
 	{
 		destroy_img(data->texture, data->mlx, 3, text);
+		mlx_terminate(data->mlx);
 		exit_strerror("mlx_texture_to_image failed\n", 1);
 	}
 }
@@ -79,4 +83,5 @@ void get_texture(t_data *data)
 	malloc_null_check(data->texture);
 	load_img(data, textures);
 	destroy_texture(textures, 5);
+	free(textures);
 }
