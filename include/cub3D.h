@@ -6,7 +6,6 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/06 11:43:29 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +21,11 @@
 
 # define WIDTH 1600
 # define HEIGHT 1024
-# define ROTATE_SEEP 2
 # define MOVE_SEEP 0.08f
 # define MIN_DISTANCE 0.2f
 # define PI 3.14159265359f
 # define EPS 1e-4
-# define MAX_VIEW_POINT 1
 # define FOV 66.0f
-# define COLLISIONS_ANGLE 2.0f
-# define DIR_LENGTH 1.0f
-# define MIN_MAP_X 5
-# define MIN_MAP_Y 3
 # define BUFFER_SIZE 10
 
 enum				param_type
