@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/07 12:25:10 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:02:25 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 
 # define ROTATE_SEEP 1.5f
 # define MOVE_SEEP 0.08f
-# define MIN_DISTANCE 0.3f
+# define MIN_DISTANCE 0.14f
 # define PI 3.14159265359f
 # define EPS 1e-4
 # define FOV 66.0f
-# define COLLISIONS_ANGLE 90.0f
+# define COLLISIONS_ANGLE 30.0f
 # define BUFFER_SIZE 10
 
 enum				param_type
