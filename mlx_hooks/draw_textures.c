@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:26:12 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/07 09:34:01 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:25:50 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ void ver_line(t_data *data, int x, t_draw *draw)
 	uint32_t *pix;
 	uint32_t color;
 
-	int line_height = (int)(HEIGHT / draw->distance);
-	int draw_start = -line_height / 2 + HEIGHT / 2;
+	int line_height = (int)(data->height / draw->distance);
+	int draw_start = -line_height / 2 + data->height / 2;
 	if (draw_start < 0)
 		draw_start = 0;
-	int draw_end = line_height / 2 + HEIGHT / 2;
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
+	int draw_end = line_height / 2 + data->height / 2;
+	if (draw_end >= data->height)
+		draw_end = data->height - 1;
 	pix = (uint32_t *)draw->img->pixels;
 	step = 1.0 * draw->img->height / line_height;
-	tex_pos = (draw_start - HEIGHT / 2.0 + line_height / 2.0) * step;
+	tex_pos = (draw_start - data->height / 2.0 + line_height / 2.0) * step;
 	while (draw_start <= draw_end)
 	{
 		tex_pos += step;
