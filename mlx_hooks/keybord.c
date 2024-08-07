@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/07 11:46:09 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:28:51 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ void clean_exit(t_data *data)
 	exit(0);
 }
 
+void error_exit(t_data *data)
+{
+	printf("Error: MLX42: %s\n", mlx_strerror(mlx_errno));
+	mlx_delete_image(data->mlx, data->image);
+	mlx_terminate(data->mlx);
+	free_param(data->param);
+	free(data->texture);
+	exit(1);
+}
+
 void keybord(mlx_key_data_t keydata, void *param)
 {
 	t_data *data;
@@ -83,7 +93,7 @@ void keybord(mlx_key_data_t keydata, void *param)
 		move_player(data, LEFT);
 	else if (keydata.key == MLX_KEY_A)
 		move_player(data, RIGHT);
-	game(data, WIDTH);
+	game(data);
 
 }
 

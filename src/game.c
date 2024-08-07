@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:45:05 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/07 11:55:00 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:22:36 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	color_floor_ceiling(t_data *data)
 	}
 }
 
-void	game(t_data *data, int width)
+void	game(t_data *data)
 {
 	const t_vec2f	pos = data->param->map_data->pos;
 	t_vec2f			point;
@@ -46,10 +46,10 @@ void	game(t_data *data, int width)
 	int				x;
 
 	color_floor_ceiling(data);
-	delta = FOV / (WIDTH - 1);
+	delta = FOV / (data->width - 1);
 	angle = data->player_angle - FOV / 2;
 	x = 0;
-	while (x < width)
+	while (x < data->width)
 	{
 		point = get_wall_postion(data->param->map_data, pos, angle);
 		draw.distance = vec_distance(pos, point);
