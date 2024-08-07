@@ -6,7 +6,7 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/08/06 12:52:52 by hibenouk         ###   ########.fr        #
+#    Updated: 2024/08/07 09:43:36 by hibenouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CC          = cc
 
 INC         = -Iinclude -I$(HOME)/.brew/include       
 
-CFLAGS      = -Wall -Wextra -Werror  $(INC)    
-
+CFLAGS      = -Wall -Wextra -Werror   -g -ggdb3 $(INC)    
+# -fsanitize=address
 OBJ_DIR     = ./obj/
 
 SRC_DIR     = ./
