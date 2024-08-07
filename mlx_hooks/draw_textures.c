@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:26:12 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/16 15:47:38 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/07 09:34:01 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void ver_line(t_data *data, int x, t_draw *draw)
 
 
 
-int get_side(t_vec2f point)
+static int get_side(t_vec2f point)
 {
 	if (point.x == floor(point.x))
 		return (0);
