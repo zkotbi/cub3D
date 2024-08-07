@@ -6,12 +6,10 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/06 12:09:56 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:46:09 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "MLX42/MLX42.h"
 #include "cub3D.h"
 
 static int check_collisions(t_data *data, double mov_ang)
@@ -21,8 +19,8 @@ static int check_collisions(t_data *data, double mov_ang)
 	t_vec2f point;
 	double distance;
 
-	r = mov_ang + COLLISIONS_ANGLE;
-	l = mov_ang - COLLISIONS_ANGLE;
+	r = mov_ang + 45.0f;
+	l = mov_ang;
 	point = data->param->map_data->pos;
 	while (l <= r)
 	{
@@ -30,7 +28,7 @@ static int check_collisions(t_data *data, double mov_ang)
 		distance = vec_distance(data->param->map_data->pos, point);
 		if (distance <= MIN_DISTANCE)
 			return (1);
-		l++;
+		l += 7.0f;
 	}
 	return (0);
 
@@ -38,8 +36,8 @@ static int check_collisions(t_data *data, double mov_ang)
 
 static void	move_player(t_data *data, enum e_move_dir dir)
 {
-	t_vec2f	d;
 	t_vec2f *const pos = &data->param->map_data->pos;
+	t_vec2f	d;
 	double move_angle;
 
 	move_angle = data->player_angle;
