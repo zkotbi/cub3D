@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/07 10:59:13 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:25:10 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 # define CUB3D_H
 
 # include <MLX42/MLX42.h>
-# include <math.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH 1600
-# define HEIGHT 1024
 # define ROTATE_SEEP 1.5f
 # define MOVE_SEEP 0.08f
 # define MIN_DISTANCE 0.3f
@@ -35,7 +33,6 @@ enum				param_type
 {
 	CELLING = 1,
 	FLOOR = 2,
-
 	EAST = 0,
 	SOUTH = 90,
 	WEST = 180,
@@ -55,7 +52,7 @@ typedef struct s_lst
 	char			*content;
 	struct s_lst	*next;
 	struct s_lst	*prev;
-	long size;
+	long			size;
 }					t_lst;
 
 typedef struct s_draw
@@ -115,7 +112,6 @@ typedef struct s_param
 	t_map			*map_data;
 }					t_param;
 
-
 typedef struct s_text
 {
 	mlx_texture_t	*north;
@@ -140,12 +136,15 @@ typedef struct s_data
 	t_param			*param;
 	double			player_angle;
 	t_img			*texture;
+	int				width;
+	int				height;
 }					t_data;
 
 t_data				init_data(char *path);
 /*---------------TEXTURES---------------*/
 void				get_texture(t_data *data);
 void				clean_exit(t_data *data);
+void				error_exit(t_data *data);
 
 /*---------------FREE---------------*/
 void				free_tokens(t_token *tokens, t_lst *content);
@@ -211,5 +210,5 @@ void				keybord(mlx_key_data_t keydata, void *param);
 
 /* game loop */
 
-void				game(t_data *data, int width);
+void				game(t_data *data);
 #endif
