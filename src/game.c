@@ -6,11 +6,10 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:45:05 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/06 10:51:59 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:55:00 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42.h"
 #include "cub3D.h"
 
 static void	color_floor_ceiling(t_data *data)
@@ -52,11 +51,11 @@ void	game(t_data *data, int width)
 	x = 0;
 	while (x < width)
 	{
-		angle += delta;
 		point = get_wall_postion(data->param->map_data, pos, angle);
 		draw.distance = vec_distance(pos, point);
 		draw.img = get_img_direc(point, data);
 		draw.x_pos = get_tex_x(point, angle, draw.img);
 		ver_line(data, x++, &draw);
+		angle += delta;
 	}
 }
