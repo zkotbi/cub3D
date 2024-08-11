@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/07 15:02:25 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/11 10:30:44 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define COLLISIONS_ANGLE 30.0f
 # define BUFFER_SIZE 10
 
-enum				param_type
+enum				e_param_type
 {
 	CELLING = 1,
 	FLOOR = 2,
@@ -60,6 +60,10 @@ typedef struct s_draw
 	int				x_pos;
 	mlx_image_t		*img;
 	double			distance;
+	int				draw_end;
+	int				draw_start;
+	int				line_height;
+	double			step;
 }					t_draw;
 
 typedef struct s_vec2d
@@ -76,10 +80,10 @@ typedef struct s_vec2f
 
 typedef struct s_map
 {
-	char			**map;
-	t_vec2d			sizes;
-	t_vec2f			pos;
-	enum param_type	init_direc;
+	char				**map;
+	t_vec2d				sizes;
+	t_vec2f				pos;
+	enum e_param_type	init_direc;
 }					t_map;
 
 typedef struct s_token
@@ -141,20 +145,16 @@ typedef struct s_data
 }					t_data;
 
 t_data				init_data(char *path);
-/*---------------TEXTURES---------------*/
 void				get_texture(t_data *data);
 void				clean_exit(t_data *data);
 void				error_exit(t_data *data);
-
-/*---------------FREE---------------*/
+uint32_t			reverse_bytes(uint32_t value);
 void				free_tokens(t_token *tokens, t_lst *content);
 void				free_tab(char **tab);
 void				free_lst(t_lst *lst);
 void				free_param(t_param *param);
 void				destroy_texture(t_text *texture, int n);
 void				destroy_img(t_img *img, mlx_t *mlx, int n, t_text *text);
-
-/*-----parsing_and_error_handle-----*/
 t_param				*parser_and_error_check(char *argv);
 int					extension_check(char *argv);
 void				exit_strerror(char *str, int code);
@@ -165,6 +165,7 @@ t_token				*tokeniz_file_content(t_lst *file_content);
 t_param				*get_and_verify_param(t_token *tokens);
 void				verify_map(t_param *param, t_lst *lst);
 void				parser_map(t_param *param, t_lst *lst);
+void				count_and_check_char(t_lst *lst);
 /*math */
 t_vec2d				vec2d(int x, int y);
 t_vec2f				vec2f(double x, double y);
@@ -190,9 +191,8 @@ t_vec2f				mul2f(t_vec2f v, t_vec2f u);
 // t_vec2f				ray_casting(t_vec2f position, t_vec2f direction);
 t_vec2f				get_wall_postion(t_map *map_data, t_vec2f player_position,
 						double angle);
-// int		verify_type(char *info, int *count);
 
-void				ver_line(t_data *data, int x, t_draw *draw);
+void				ver__line(t_data *data, int x, t_draw *draw);
 int					get_tex_x(t_vec2f point, double angle, mlx_image_t *img);
 mlx_image_t			*get_img_direc(t_vec2f point, t_data *data);
 /*-----LIBFT-----*/

@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:45:05 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:22:36 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/09 01:40:06 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	game(t_data *data)
 		draw.distance = vec_distance(pos, point);
 		draw.img = get_img_direc(point, data);
 		draw.x_pos = get_tex_x(point, angle, draw.img);
-		ver_line(data, x++, &draw);
+		ver__line(data, x++, &draw);
 		angle += delta;
 	}
 }

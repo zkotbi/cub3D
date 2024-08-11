@@ -6,17 +6,17 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:07:27 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/29 12:41:59 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/08 22:57:45 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char *ft_strtrim(char *str, char c)
+char	*ft_strtrim(char *str, char c)
 {
-	int size;
-	int i;
-	char *trim;
+	int		size;
+	int		i;
+	char	*trim;
 
 	size = 0;
 	i = 0;

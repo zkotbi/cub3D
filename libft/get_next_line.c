@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:21:45 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/24 13:42:46 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/08 23:01:07 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ static char	*ft_read(char	*backup, int fd)
 	{
 		r = read(fd, buf, BUFFER_SIZE);
 		if (r < 0)
-			return (ft_memdel(&buf), exit_strerror("cannot read from file\n", 1) , NULL);
+			return (ft_memdel(&buf),
+				exit_strerror("cannot read from file\n", 1), NULL);
 		else if (r == 0)
 			break ;
 		buf[r] = 0;
 		backup = ft_strjoin(backup, buf, r);
 		if (backup == NULL)
-			return (ft_memdel(&buf), exit_strerror("malloc failure\n", 1), NULL);
+			return (ft_memdel(&buf),
+				exit_strerror("malloc failure\n", 1), NULL);
 	}
 	ft_memdel(&buf);
 	return (backup);
@@ -67,11 +69,9 @@ static char	*ft_line(char	*backup)
 static char	*ft_backup(char	*backup, int *check)
 {
 	int		i;
-	int		j;
 	char	*rt_back;
 
 	i = 0;
-	j = 0;
 	if (backup[i] == 0)
 		return (*check = 0, ft_memdel(&backup));
 	while (backup[i] != 0 && backup[i] != '\n')
@@ -97,7 +97,8 @@ char	*get_next_line(int fd)
 	check = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= 2147483647
 		|| read(fd, &check, 0) < 0)
-		return (ft_memdel(&backup), exit_strerror("cannot read from file\n", 1), NULL);
+		return (ft_memdel(&backup),
+			exit_strerror("cannot read from file\n", 1), NULL);
 	backup = ft_read(backup, fd);
 	if (backup == NULL)
 		return (NULL);
@@ -107,6 +108,5 @@ char	*get_next_line(int fd)
 	backup = ft_backup(backup, &check);
 	if (backup == NULL && check == -1)
 		return (ft_memdel(&backup), exit_strerror("malloc failure\n", 1), NULL);
-		// return (ft_memdel(&line));
 	return (line);
 }

@@ -6,15 +6,15 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:43:25 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/07/10 17:27:36 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/11 10:29:48 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void find_max_size(t_lst *lst, int *size)
+static void	find_max_size(t_lst *lst, int *size)
 {
-	t_lst *tmp;
+	t_lst	*tmp;
 
 	size[0] = 0;
 	size[1] = 0;
@@ -28,9 +28,9 @@ void find_max_size(t_lst *lst, int *size)
 	}
 }
 
-void copy_and_fill(char *str, char *to_copy, int max)
+static void	copy_and_fill(char *str, char *to_copy, int max)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (to_copy[i] != 0 && to_copy[i] != '\n')
@@ -46,16 +46,26 @@ void copy_and_fill(char *str, char *to_copy, int max)
 	str[i] = 0;
 }
 
-void init_map_data(t_map *map)
+static void	init_direc(t_map *map, int i, int j)
 {
-	int i;
-	int j;
+	if (map->map[i][j] == 'N')
+		map->init_direc = NORTH;
+	else if (map->map[i][j] == 'W')
+		map->init_direc = WEST;
+	else if (map->map[i][j] == 'E')
+		map->init_direc = EAST;
+	else if (map->map[i][j] == 'S')
+		map->init_direc = SOUTH;
+	map->pos.x = j;
+	map->pos.y = i;
+}
+
+static void	init_map_data(t_map *map)
+{
+	int	i;
+	int	j;
 
 	i = 0;
-	// map->pos = malloc(sizeof(t_vec2f));
-	// malloc_null_check(map->pos);
-	// map->sizes = malloc(sizeof(t_vec2d));
-	// malloc_null_check(map->sizes);
 	while (map->map[i] != NULL)
 	{
 		j = 0;
@@ -63,18 +73,7 @@ void init_map_data(t_map *map)
 		{
 			if (map->map[i][j] != '0' && map->map[i][j] != '1'
 				&& map->map[i][j] != ' ')
-			{
-				if (map->map[i][j] == 'N')
-					map->init_direc = NORTH;
-				else if (map->map[i][j] == 'W')
-					map->init_direc = WEST;
-				else if (map->map[i][j] == 'E')
-					map->init_direc = EAST;
-				else if (map->map[i][j] == 'S')
-					map->init_direc = SOUTH;
-				map->pos.x = j;
-				map->pos.y = i;
-			}
+				init_direc(map, i, j);
 			j++;
 		}
 		i++;
@@ -83,11 +82,11 @@ void init_map_data(t_map *map)
 	map->sizes.y = i;
 }
 
-void parser_map(t_param *param, t_lst *lst)
+void	parser_map(t_param *param, t_lst *lst)
 {
-	int size[2];
-	t_lst *tmp;
-	int i;
+	int		size[2];
+	t_lst	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = lst;

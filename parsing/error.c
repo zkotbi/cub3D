@@ -6,13 +6,13 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 05:31:08 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 05:32:56 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/08 23:52:33 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void exit_strerror(char *str, int code)
+void	exit_strerror(char *str, int code)
 {
 	if (str != NULL)
 	{
@@ -22,7 +22,7 @@ void exit_strerror(char *str, int code)
 	exit(code);
 }
 
-void malloc_null_check(void *ptr)
+void	malloc_null_check(void *ptr)
 {
 	if (ptr == NULL)
 		exit_strerror("malloc failed\n", 1);

@@ -6,16 +6,16 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 08:41:27 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/27 17:04:25 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/08 22:56:34 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "cub3D.h"
 
-void fd_putstr(const char *str, int fd)
+void	fd_putstr(const char	*str, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != 0)

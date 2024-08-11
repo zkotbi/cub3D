@@ -6,7 +6,7 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/08/07 09:43:36 by hibenouk         ###   ########.fr        #
+#    Updated: 2024/08/11 10:18:35 by zkotbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CC          = cc
 
 INC         = -Iinclude -I$(HOME)/.brew/include       
 
-CFLAGS      = -Wall -Wextra -Werror   -g -ggdb3 $(INC)    
-# -fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror $(INC)    
+# -fsanitize=address -g -ggdb3
 OBJ_DIR     = ./obj/
 
 SRC_DIR     = ./
@@ -34,16 +34,19 @@ SRCS =  ./libft/ft_atoi.c \
 		./math/vec.c \
 		./math/vec2.c \
 		./mlx_hooks/draw_textures.c \
+		./mlx_hooks/draw_utils.c \
 		./mlx_hooks/keybord.c \
 		./parsing/error.c \
 		./parsing/error_handle_utils.c \
+		./parsing/allocate_file.c \
 		./parsing/free.c \
+		./parsing/free_utils.c \
 		./parsing/get_param.c \
 		./parsing/init_textures.c \
 		./parsing/map_verification.c \
+		./parsing/map_verification_utils.c \
 		./parsing/parser_error_handle.c \
 		./parsing/parser_map.c \
-		./parsing/parsing.c \
 		./raycasting/raycasting.c \
 		./src/game.c \
 		./src/init.c \
