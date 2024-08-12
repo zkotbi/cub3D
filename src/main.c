@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/12 14:30:33 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/12 15:09:36 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	windows_resize(int width, int height, void *param)
 	game(data);
 }
 
-// void leaks() {system("leaks cub3D");}//WARNING
-
 int	main(int ac, char **argv)
 {
 	t_data	data;
@@ -39,6 +37,7 @@ int	main(int ac, char **argv)
 	data = init_data(argv[1]);
 	mlx_key_hook(data.mlx, keybord, &data);
 	mlx_resize_hook(data.mlx, windows_resize, &data);
+	game(&data);
 	mlx_loop(data.mlx);
 	clean_exit(&data);
 	return (EXIT_SUCCESS);

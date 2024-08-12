@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/11 10:30:44 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/12 15:18:38 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define PI 3.14159265359f
 # define EPS 1e-4
 # define FOV 66.0f
-# define COLLISIONS_ANGLE 30.0f
+# define COLLISIONS_ANGLE 10.0f
 # define BUFFER_SIZE 10
 
 enum				e_param_type
