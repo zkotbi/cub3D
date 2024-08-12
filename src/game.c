@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:45:05 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/09 01:40:06 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/12 14:26:42 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,20 @@ void	game(t_data *data)
 	const t_vec2f	pos = data->param->map_data->pos;
 	t_vec2f			point;
 	t_draw			draw;
-	double			delta;
-	double			angle;
 	int				x;
+	double			val[2];
 
 	color_floor_ceiling(data);
-	delta = FOV / (data->width - 1);
-	angle = data->player_angle - FOV / 2;
+	val[0] = FOV / (data->width - 1);
+	val[1] = data->player_angle - FOV / 2;
 	x = 0;
 	while (x < data->width)
 	{
-		point = get_wall_postion(data->param->map_data, pos, angle);
+		point = get_wall_postion(data->param->map_data, pos, val[1]);
 		draw.distance = vec_distance(pos, point);
 		draw.img = get_img_direc(point, data);
-		draw.x_pos = get_tex_x(point, angle, draw.img);
+		draw.x_pos = get_tex_x(point, val[1], draw.img);
 		ver__line(data, x++, &draw);
-		angle += delta;
+		val[1] += val[0];
 	}
 }

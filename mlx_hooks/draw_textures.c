@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:26:12 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/11 10:17:26 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/11 11:45:36 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_tex_x(t_vec2f	point, double angle, mlx_image_t *img)
 		wall_x = point.x ;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * (double)(img->width));
-	if ((direction(angle).x < 0 && get_side(point) == 0)
+	if ((get_side(point) == 0 && direction(angle).x < 0)
 		|| (direction(angle).y > 0 && get_side(point) == 1))
 		tex_x = img->width - tex_x - 1;
 	return (tex_x);

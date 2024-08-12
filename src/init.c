@@ -6,13 +6,13 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:06:55 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/07 12:26:54 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:28:08 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void mlx_error42(t_data *data)
+static void	mlx_error42(t_data *data)
 {
 	printf("Error: MLX42: %s\n", mlx_strerror(mlx_errno));
 	free_param(data->param);
@@ -20,9 +20,9 @@ static void mlx_error42(t_data *data)
 	exit(1);
 }
 
-static mlx_image_t *new_image_to_window(t_data *data, t_vec2d wsize)
+static mlx_image_t	*new_image_to_window(t_data *data, t_vec2d wsize)
 {
-	mlx_image_t *image;
+	mlx_image_t	*image;
 
 	image = mlx_new_image(data->mlx, wsize.x, wsize.y);
 	if (!image)
@@ -35,9 +35,9 @@ static mlx_image_t *new_image_to_window(t_data *data, t_vec2d wsize)
 	return (image);
 }
 
-t_data init_data(char *path)
+t_data	init_data(char *path)
 {
-	t_data data;
+	t_data	data;
 
 	data.param = parser_and_error_check(path);
 	data.width = 1600;
