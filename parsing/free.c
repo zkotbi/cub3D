@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 23:07:33 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/11 10:23:18 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/13 08:57:23 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
+	if (tab == NULL)
+		return ;
 	while (tab[i] != NULL)
 	{
 		free(tab[i]);

@@ -6,7 +6,7 @@
 #    By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:38:52 by hibenouk          #+#    #+#              #
-#    Updated: 2024/08/11 10:18:35 by zkotbi           ###   ########.fr        #
+#    Updated: 2024/08/13 09:11:44 by zkotbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CC          = cc
 
 INC         = -Iinclude -I$(HOME)/.brew/include       
 
-CFLAGS      = -Wall -Wextra -Werror $(INC)    
-# -fsanitize=address -g -ggdb3
+CFLAGS      = -Wall -Wextra -Werror $(INC)  -fsanitize=address  -O3 -Ofast
+
 OBJ_DIR     = ./obj/
 
 SRC_DIR     = ./
@@ -52,10 +52,9 @@ SRCS =  ./libft/ft_atoi.c \
 		./src/init.c \
 		./src/main.c 
 
-OBJS        = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
+OBJS        = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
-
-all: $(NAME) run
+all: $(NAME)
 
 $(NAME): $(OBJS) include/cub3d.h
 	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
@@ -64,9 +63,6 @@ $(OBJ_DIR)%.o:  $(SRC_DIR)%.c include/cub3d.h
 	@mkdir -p $(dir $@)
 	$(CC) -c $(CFLAGS) $< -o $@
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
 clean:
 	rm -rf $(OBJ_DIR)
 
@@ -74,9 +70,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-run :
-	./$(NAME) maps/map.cub
-
 
 .PHONY: all clean fclean re

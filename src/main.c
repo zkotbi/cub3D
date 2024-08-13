@@ -24,8 +24,6 @@ void	windows_resize(int width, int height, void *param)
 	game(data);
 }
 
-// void leaks() {system("leaks cub3D");}//WARNING
-
 int	main(int ac, char **argv)
 {
 	t_data	data;

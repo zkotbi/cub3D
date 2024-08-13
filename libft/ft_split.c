@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:25:46 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/06/25 08:35:53 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/13 08:56:18 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	count(const char	*s, char c)
 	i = 0;
 	while (s[i] != 0)
 	{
-		while (s[i] && s[i] == c)
+		if (s[i] && s[i] == c)
 			i++;
 		if (s[i] == '\0')
 			break ;
@@ -54,11 +54,13 @@ char	**ft_split(char *s, char c)
 
 	i[0] = 0;
 	i[1] = 0;
+	if (s[0] == c)
+		return (NULL);
 	rt = malloc(sizeof(char *) * (count(s, c) + 1));
 	malloc_null_check(rt);
 	while (i[1] < count(s, c))
 	{
-		while (s[*i] && s[*i] == c)
+		if (s[*i] && s[*i] == c)
 			i[0]++;
 		i[2] = 0;
 		while (s[*i] && s[*i] != c)

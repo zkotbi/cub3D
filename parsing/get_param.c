@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 08:11:19 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/11 10:24:59 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/13 09:08:29 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	set_rgb(char *info, t_color *rgb)
 
 	i = 0;
 	tmp = ft_split(info, ',');
+	if (tmp == NULL)
+		exit_strerror("invalid color informaton\n", 1);
 	*rgb = (t_color){-1, -1, -1, -1};
 	while (tmp[i] != NULL)
 	{
@@ -51,6 +53,8 @@ static void	set_rgb(char *info, t_color *rgb)
 			rgb->blue = ft_atoi(tmp[i]);
 		i++;
 	}
+	if ((char)rgb->red == -1 || (char)rgb->green == -1 || (char)rgb->blue == -1)
+		exit_strerror("invalid color informaton\n", 1);
 	free_tab(tmp);
 }
 
