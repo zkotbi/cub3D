@@ -17,7 +17,7 @@ CC          = cc
 
 INC         = -Iinclude -I$(HOME)/.brew/include       
 
-CFLAGS      = -Wall -Wextra -Werror $(INC)  -fsanitize=address  -O3 -Ofast
+CFLAGS      = -Wall -Wextra -Werror $(INC)  #-fsanitize=address  -O3 -Ofast
 
 OBJ_DIR     = ./obj/
 

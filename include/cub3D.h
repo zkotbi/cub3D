@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/12 15:18:38 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:54:28 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define ROTATE_SEEP 1.5f
+# define ROTATE_SEEP 2.0f
 # define MOVE_SEEP 0.08f
 # define MIN_DISTANCE 0.14f
 # define PI 3.14159265359f
@@ -34,9 +34,9 @@ enum				e_param_type
 	CELLING = 1,
 	FLOOR = 2,
 	EAST = 0,
-	SOUTH = 90,
+	SOUTH = 270,
 	WEST = 180,
-	NORTH = 270,
+	NORTH = 90,
 };
 
 enum				e_move_dir
