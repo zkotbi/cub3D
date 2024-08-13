@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:12:51 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/12 14:30:33 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/12 14:35:17 by zkotbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int ac, char **argv)
 	data = init_data(argv[1]);
 	mlx_key_hook(data.mlx, keybord, &data);
 	mlx_resize_hook(data.mlx, windows_resize, &data);
+	game(&data);
 	mlx_loop(data.mlx);
 	clean_exit(&data);
 	return (EXIT_SUCCESS);
