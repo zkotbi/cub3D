@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:01:18 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/13 12:29:06 by hibenouk         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:10:18 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define ROTATE_SEEP 2.0f
+# define ROTATE_SEEP 3.0f
 # define MOVE_SEEP 0.1f
 # define MIN_DISTANCE 0.2f
 # define PI 3.14159265359f
