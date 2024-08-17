@@ -6,11 +6,11 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 08:11:19 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/13 12:34:40 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/17 12:19:37 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "cub3D.h"
 
 static void	verify_texture(t_param *param, char *path, enum e_param_type type)
 {
@@ -33,29 +33,29 @@ static void	verify_texture(t_param *param, char *path, enum e_param_type type)
 
 static void	set_rgb(char *info, t_color *rgb)
 {
-	char	**tmp;
+	char	**colors;
 	int		i;
 
 	i = 0;
-	tmp = ft_split(info, ',');
-	if (tmp == NULL)
+	colors = ft_split(info, ',');
+	if (colors == NULL)
 		exit_strerror("invalid color informaton\n", 1);
 	*rgb = (t_color){-1, -1, -1, -1};
-	while (tmp[i] != NULL)
+	while (colors[i] != NULL)
 	{
 		if (i > 2)
 			exit_strerror("invalid color informaton\n", 1);
 		if (i == 0)
-			rgb->red = ft_atoi(tmp[i]);
+			rgb->red = ft_atoi(colors[i]);
 		if (i == 1)
-			rgb->green = ft_atoi(tmp[i]);
+			rgb->green = ft_atoi(colors[i]);
 		if (i == 2)
-			rgb->blue = ft_atoi(tmp[i]);
+			rgb->blue = ft_atoi(colors[i]);
 		i++;
 	}
-	// if ((char)rgb->red == -1 || (char)rgb->green == -1 || (char)rgb->blue == -1)
-		// exit_strerror("invalid color informaton\n", 1);
-	free_tab(tmp);
+	free_tab(colors);
+	if (i != 3)
+		exit_strerror("invalid color informaton\n", 1);
 }
 
 static void	verify_color(t_param *param, char *path, enum e_param_type type)
@@ -68,13 +68,9 @@ static void	verify_color(t_param *param, char *path, enum e_param_type type)
 	if (path[i] == 0 || i == 1)
 		exit_strerror("empty or invalid informaton\n", 1);
 	if (type == CELLING)
-	{
 		set_rgb(&path[i], &(param->celling_color));
-	}
 	else if (type == FLOOR)
-	{
 		set_rgb(&path[i], &(param->floor_color));
-	}
 }
 
 t_param	*get_and_verify_param(t_token *tokens)

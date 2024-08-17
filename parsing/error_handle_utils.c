@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 08:37:33 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/11 10:22:18 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/17 11:52:21 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,19 @@ static void	tokeniz_file_content_utils(t_lst *lst_tmp, t_token *tokens)
 
 t_token	*tokeniz_file_content(t_lst *file_content)
 {
-	t_lst	*lst_tmp;
+	t_lst	*lst_it;
 	t_token	*tokens;
 
 	tokens = malloc(sizeof(t_token));
 	malloc_null_check(tokens);
 	tokens_init(tokens);
-	lst_tmp = file_content;
-	while (lst_tmp != NULL && is_token_null(tokens))
+	lst_it = file_content;
+	while (lst_it != NULL && is_token_null(tokens))
 	{
-		tokeniz_file_content_utils(lst_tmp, tokens);
-		lst_tmp = lst_tmp->next;
+		tokeniz_file_content_utils(lst_it, tokens);
+		lst_it = lst_it->next;
 	}
-	tokens->map = lst_tmp;
+	tokens->map = lst_it;
 	if (tokens->map == NULL || is_token_null(tokens))
 		return (exit_strerror("invalid or missing information\n", 1), NULL);
 	return (tokens);

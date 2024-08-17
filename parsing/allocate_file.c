@@ -6,7 +6,7 @@
 /*   By: zkotbi <zkotbi@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 08:41:02 by zkotbi            #+#    #+#             */
-/*   Updated: 2024/08/11 08:41:20 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/17 12:26:58 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	allocate_file_content_utils(t_lst *lst_tmp)
 	lst_tmp->prev = NULL;
 }
 
-t_lst	*allocate_file_content(char	*argv)
+t_lst	*allocate_file_content(char	*file_name)
 {
-	const int		fd = open(argv, O_RDONLY);
+	const int		fd = open(file_name, O_RDONLY);
 	t_lst			*content;
 	t_lst			*lst_tmp;
 	char			*line;

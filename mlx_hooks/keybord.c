@@ -6,7 +6,7 @@
 /*   By: hibenouk <hibenouk@1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:08 by hibenouk          #+#    #+#             */
-/*   Updated: 2024/08/12 14:07:27 by zkotbi           ###   ########.fr       */
+/*   Updated: 2024/08/17 12:32:36 by hibenouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_collisions(t_data *data, double mov_ang)
 		distance = vec_distance(data->param->map_data->pos, point);
 		if (distance <= MIN_DISTANCE)
 			return (1);
-		l += 5.0f;
+		l += 2.0f;
 	}
 	return (0);
 }

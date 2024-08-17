@@ -1,0 +1,418 @@
+[
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "libft/ft_atoi.c",
+   "-o",
+   "obj/./libft/ft_atoi.o"
+  ],
+  "file": "libft/ft_atoi.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "libft/ft_putstr.c",
+   "-o",
+   "obj/./libft/ft_putstr.o"
+  ],
+  "file": "libft/ft_putstr.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "libft/ft_split.c",
+   "-o",
+   "obj/./libft/ft_split.o"
+  ],
+  "file": "libft/ft_split.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "libft/ft_strtrim.c",
+   "-o",
+   "obj/./libft/ft_strtrim.o"
+  ],
+  "file": "libft/ft_strtrim.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "libft/get_next_line.c",
+   "-o",
+   "obj/./libft/get_next_line.o"
+  ],
+  "file": "libft/get_next_line.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "libft/get_next_line_utils.c",
+   "-o",
+   "obj/./libft/get_next_line_utils.o"
+  ],
+  "file": "libft/get_next_line_utils.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "math/vec.c",
+   "-o",
+   "obj/./math/vec.o"
+  ],
+  "file": "math/vec.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "math/vec2.c",
+   "-o",
+   "obj/./math/vec2.o"
+  ],
+  "file": "math/vec2.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "mlx_hooks/draw_textures.c",
+   "-o",
+   "obj/./mlx_hooks/draw_textures.o"
+  ],
+  "file": "mlx_hooks/draw_textures.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "mlx_hooks/draw_utils.c",
+   "-o",
+   "obj/./mlx_hooks/draw_utils.o"
+  ],
+  "file": "mlx_hooks/draw_utils.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "mlx_hooks/keybord.c",
+   "-o",
+   "obj/./mlx_hooks/keybord.o"
+  ],
+  "file": "mlx_hooks/keybord.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/error.c",
+   "-o",
+   "obj/./parsing/error.o"
+  ],
+  "file": "parsing/error.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/error_handle_utils.c",
+   "-o",
+   "obj/./parsing/error_handle_utils.o"
+  ],
+  "file": "parsing/error_handle_utils.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/allocate_file.c",
+   "-o",
+   "obj/./parsing/allocate_file.o"
+  ],
+  "file": "parsing/allocate_file.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/free.c",
+   "-o",
+   "obj/./parsing/free.o"
+  ],
+  "file": "parsing/free.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/free_utils.c",
+   "-o",
+   "obj/./parsing/free_utils.o"
+  ],
+  "file": "parsing/free_utils.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/get_param.c",
+   "-o",
+   "obj/./parsing/get_param.o"
+  ],
+  "file": "parsing/get_param.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/init_textures.c",
+   "-o",
+   "obj/./parsing/init_textures.o"
+  ],
+  "file": "parsing/init_textures.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/map_verification.c",
+   "-o",
+   "obj/./parsing/map_verification.o"
+  ],
+  "file": "parsing/map_verification.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/map_verification_utils.c",
+   "-o",
+   "obj/./parsing/map_verification_utils.o"
+  ],
+  "file": "parsing/map_verification_utils.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/parser_error_handle.c",
+   "-o",
+   "obj/./parsing/parser_error_handle.o"
+  ],
+  "file": "parsing/parser_error_handle.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "parsing/parser_map.c",
+   "-o",
+   "obj/./parsing/parser_map.o"
+  ],
+  "file": "parsing/parser_map.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "raycasting/raycasting.c",
+   "-o",
+   "obj/./raycasting/raycasting.o"
+  ],
+  "file": "raycasting/raycasting.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "src/game.c",
+   "-o",
+   "obj/./src/game.o"
+  ],
+  "file": "src/game.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "src/init.c",
+   "-o",
+   "obj/./src/init.o"
+  ],
+  "file": "src/init.c"
+ },
+ {
+  "directory": "/Users/hibenouk/Desktop/cub2d",
+  "arguments": [
+   "cc",
+   "-c",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iinclude",
+   "-I/Users/hibenouk/.brew/include",
+   "src/main.c",
+   "-o",
+   "obj/./src/main.o"
+  ],
+  "file": "src/main.c"
+ }
+]
